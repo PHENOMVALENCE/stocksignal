@@ -23,3 +23,15 @@ One deployable keeps operations and debugging predictable while service boundari
 ## ADR-006: Optimize for reliable demonstration quality
 
 The MVP prioritizes correct stock state, duplicate-alert suppression, clear failures, and a reproducible demo over a large feature count.
+
+## ADR-007: Lift vulnerable transitive dependencies with npm overrides
+
+The Africa's Talking SDK is required for the product's core channel but pins
+`axios`, `lodash`, and `joi` versions with published advisories. Patched
+releases exist within the same major version, so `overrides` in `package.json`
+raise them in place. The alternative offered by `npm audit fix --force` is a
+downgrade of the SDK itself, which loses functionality without clearing the
+advisories. The tradeoff is that the SDK runs against dependency versions its
+authors did not pin, so SDK initialization is smoke-tested and the overrides
+are revisited on every SDK upgrade.
+
