@@ -12,10 +12,19 @@ Engineering Foundation
 - Pure, tested stock threshold logic
 - Professional application shell and `/api/health`
 - Production Docker configuration and GitHub validation workflows
+- Schema verified to apply cleanly and idempotently against PostgreSQL 16
+- Zero known dependency vulnerabilities
+
+## Verified
+
+The foundation gate is run against a clean install: lint, typecheck, 17 unit
+tests, production build, secret scan, Docker image build, a container health
+check on `/api/health`, and schema application to a throwaway PostgreSQL 16
+instance including the `updated_at` triggers and movement constraints.
 
 ## Next
 
-1. Configure a Supabase project and review/apply the schema.
+1. Configure a Supabase project and apply the verified schema.
 2. Implement inventory CRUD.
 3. Implement transactional stock movements.
 4. Persist threshold state and notification attempts.

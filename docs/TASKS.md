@@ -7,6 +7,8 @@
 - [x] Agent and architecture documentation
 - [x] Docker packaging and GitHub CI
 - [x] Health endpoint and application shell
+- [x] Schema verified against PostgreSQL, with updated_at triggers
+- [x] Dependency advisories cleared via overrides
 
 ## Inventory
 
