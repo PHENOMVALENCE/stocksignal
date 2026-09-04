@@ -1,69 +1,40 @@
-import Image from "next/image";
+import { SiteHeader } from "@/components/layout/site-header";
+
+const capabilities = [
+  { number: "01", title: "Know what is on hand", copy: "Maintain a dependable record of critical materials and every movement that changes their balance." },
+  { number: "02", title: "Catch shortages early", copy: "Compare live quantities with reorder levels and suppress repeated alerts until stock recovers." },
+  { number: "03", title: "Reach the right people", copy: "Use Africa's Talking SMS for manager alerts and supplier restock requests, even beyond the office Wi-Fi." },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="min-h-screen bg-[var(--surface)] text-[var(--ink)]">
+      <SiteHeader />
+      <main>
+        <section className="border-b border-[var(--line)]">
+          <div className="mx-auto grid max-w-7xl gap-14 px-6 py-20 lg:grid-cols-[1.35fr_0.65fr] lg:px-10 lg:py-28">
+            <div>
+              <div className="mb-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]"><span className="h-2 w-2 rounded-full bg-[var(--accent)]" /> Engineering foundation ready</div>
+              <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Inventory intelligence for manufacturers.</h1>
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)] sm:text-xl">Track critical materials, detect shortages early, and notify the right people before production stops.</p>
+              <div className="mt-10 flex flex-wrap gap-3"><a className="button-primary" href="#mvp">Explore the MVP</a><a className="button-secondary" href="/api/health">Check service health</a></div>
+            </div>
+            <aside className="self-end border-l-2 border-[var(--accent)] bg-white p-7 shadow-[0_18px_50px_rgba(18,24,22,0.07)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Build status</p><p className="mt-5 text-2xl font-semibold">Foundation</p>
+              <p className="mt-2 leading-7 text-[var(--muted)]">The application shell, database design, integration boundaries, Docker image, and CI are established.</p>
+              <div className="mt-6 border-t border-[var(--line)] pt-5 text-sm font-medium text-[var(--accent-dark)]">Next: inventory vertical slice →</div>
+            </aside>
+          </div>
+        </section>
+        <section id="mvp" className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+          <div className="mb-12 max-w-2xl"><p className="eyebrow">Core operating loop</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">From stock movement to action</h2></div>
+          <div className="grid border-y border-[var(--line)] md:grid-cols-3">
+            {capabilities.map((capability) => <article key={capability.number} className="border-b border-[var(--line)] py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"><p className="font-mono text-xs text-[var(--accent-dark)]">{capability.number}</p><h3 className="mt-6 text-xl font-semibold">{capability.title}</h3><p className="mt-3 leading-7 text-[var(--muted)]">{capability.copy}</p></article>)}
+          </div>
+          <div className="mt-14 flex flex-col justify-between gap-6 bg-[var(--ink)] px-7 py-8 text-white sm:flex-row sm:items-center"><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">Designed for the floor</p><p className="mt-2 max-w-2xl text-xl font-medium">SMS first. USSD next. Clear operations on the devices teams already use.</p></div><span className="whitespace-nowrap text-sm text-zinc-400">Africa&apos;s Talking + Supabase</span></div>
+        </section>
       </main>
+      <footer className="border-t border-[var(--line)] px-6 py-8 text-sm text-[var(--muted)] lg:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-2 sm:flex-row"><span>StockSignal</span><span>Manufacturing inventory communication</span></div></footer>
     </div>
   );
 }
