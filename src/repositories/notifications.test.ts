@@ -13,6 +13,8 @@ const row = {
   provider_message_id: null,
   status: "PENDING" as const,
   error_message: null,
+  attempt_count: 0,
+  last_attempted_at: null,
   created_at: "2026-09-05T05:00:00.000Z",
 };
 

@@ -3,6 +3,7 @@ import { AppError, isAppError } from "@/lib/errors";
 import { stockMovementSchema } from "@/lib/validation/inventory";
 import type { AppliedStockMovement } from "@/repositories/stock-rpc";
 import { stockRpc } from "@/repositories/stock-rpc";
+import { deliverNotification } from "@/services/notifications/deliver";
 
 export interface RecordStockMovementResult {
   movement?: AppliedStockMovement;
@@ -13,6 +14,7 @@ export interface RecordStockMovementResult {
 export async function recordStockMovement(
   input: unknown,
   rpc?: { applyMovement: ReturnType<typeof stockRpc>["applyMovement"] },
+  deliver: typeof deliverNotification = deliverNotification,
 ): Promise<RecordStockMovementResult> {
   const parsed = stockMovementSchema.safeParse(input);
 
@@ -30,6 +32,14 @@ export async function recordStockMovement(
       quantity: parsed.data.quantity,
       notes: parsed.data.notes,
     });
+
+    if (movement.notificationId) {
+      try {
+        await deliver(movement.notificationId);
+      } catch {
+        // Inventory is already committed; delivery failure is recorded separately.
+      }
+    }
 
     return { movement };
   } catch (error) {

@@ -43,6 +43,8 @@ export interface NotificationRecord {
   providerMessageId: string | null;
   status: NotificationStatus;
   errorMessage: string | null;
+  attemptCount: number;
+  lastAttemptedAt: string | null;
   createdAt: string;
 }
 
@@ -99,6 +101,8 @@ export function mapNotification(row: NotificationRow): NotificationRecord {
     providerMessageId: row.provider_message_id,
     status: row.status,
     errorMessage: row.error_message,
+    attemptCount: row.attempt_count,
+    lastAttemptedAt: row.last_attempted_at,
     createdAt: row.created_at,
   };
 }

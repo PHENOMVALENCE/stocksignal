@@ -75,6 +75,7 @@ export function createNotificationRepository(client: StockSignalDatabaseClient =
         status: NotificationStatus;
         providerMessageId?: string | null;
         errorMessage?: string | null;
+        attemptCount?: number;
       },
     ): Promise<NotificationRecord> {
       const { data, error } = await client
@@ -83,6 +84,8 @@ export function createNotificationRepository(client: StockSignalDatabaseClient =
           status: update.status,
           provider_message_id: update.providerMessageId ?? null,
           error_message: update.errorMessage ?? null,
+          attempt_count: update.attemptCount,
+          last_attempted_at: new Date().toISOString(),
         })
         .eq("id", id)
         .select("*")

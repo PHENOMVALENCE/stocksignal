@@ -2,7 +2,7 @@
 
 ## Current phase
 
-P0 MVP — F01–F04 complete
+P0 MVP — F01–F05 complete
 
 ## Implemented
 
@@ -18,6 +18,7 @@ P0 MVP — F01–F04 complete
 - Inventory list, empty/error states, and validated material creation
 - Transactional stock-in, stock-out, and adjustment RPC with movement history
 - Persistent low-stock transitions with one pending manager notification per crossing
+- Africa's Talking SMS delivery after commit, with sanitized SENT/FAILED audit and bounded retry
 
 ## Verified
 
@@ -29,9 +30,9 @@ instance including the `updated_at` triggers and movement constraints.
 ## Next
 
 1. Configure a Supabase project and apply `supabase/migrations`.
-2. Connect Africa's Talking SMS (F05).
-4. Implement supplier restock requests and notification history.
-5. Add optional USSD flows.
+2. Implement supplier restock requests (F06).
+3. Add the operations dashboard and notification history (F07).
+4. Add optional USSD flows.
 
 ## Blockers
 

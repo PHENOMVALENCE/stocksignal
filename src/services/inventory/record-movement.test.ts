@@ -23,6 +23,9 @@ describe("recordStockMovement", () => {
     const result = await recordStockMovement(
       { inventoryItemId: itemId, type: "STOCK_OUT", quantity: "40" },
       { applyMovement: (input) => store.apply(input) },
+      async () => {
+        throw new Error("SMS must not roll back the movement");
+      },
     );
 
     expect(result.movement?.previousQuantity).toBe(50);

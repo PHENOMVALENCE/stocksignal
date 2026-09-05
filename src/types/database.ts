@@ -128,6 +128,8 @@ export interface Database {
           provider_message_id: string | null;
           status: NotificationStatus;
           error_message: string | null;
+          attempt_count: number;
+          last_attempted_at: string | null;
           created_at: string;
         };
         Insert: {
@@ -140,6 +142,8 @@ export interface Database {
           provider_message_id?: string | null;
           status: NotificationStatus;
           error_message?: string | null;
+          attempt_count?: number;
+          last_attempted_at?: string | null;
           created_at?: string;
         };
         Update: {
@@ -152,6 +156,8 @@ export interface Database {
           provider_message_id?: string | null;
           status?: NotificationStatus;
           error_message?: string | null;
+          attempt_count?: number;
+          last_attempted_at?: string | null;
           created_at?: string;
         };
         Relationships: [

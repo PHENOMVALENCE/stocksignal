@@ -22,9 +22,9 @@
 ## Signals
 
 - [x] Pure threshold and alert-state rules
-- [ ] SMS provider connected to configured credentials
+- [x] SMS provider connected to configured credentials
 - [x] Low-stock notification persistence
-- [ ] SMS failure handling
+- [x] SMS failure handling
 
 ## Restocking
 
