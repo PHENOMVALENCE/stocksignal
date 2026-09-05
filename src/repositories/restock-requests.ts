@@ -1,21 +1,33 @@
 import "server-only";
 
-import { quantityToDatabase } from "@/lib/quantity";
+import { AppError } from "@/lib/errors";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { StockSignalDatabaseClient } from "@/lib/supabase/types";
-import { mapDatabaseError, requireData } from "@/repositories/errors";
+import { mapDatabaseError } from "@/repositories/errors";
 import { mapRestockRequest, type RestockRequest } from "@/repositories/mappers";
-
-export interface CreateRestockRequestInput {
-  inventoryItemId: string;
-  requestedQuantity: number;
-  supplierName: string;
-  supplierPhone: string;
-  notificationId?: string | null;
-}
 
 export function createRestockRequestRepository(client: StockSignalDatabaseClient = createSupabaseServerClient()) {
   return {
+    async getById(id: string): Promise<RestockRequest | null> {
+      const { data, error } = await client.from("restock_requests").select("*").eq("id", id).maybeSingle();
+
+      if (error) {
+        throw mapDatabaseError(error, "The restock request could not be loaded.");
+      }
+
+      return data ? mapRestockRequest(data) : null;
+    },
+
+    async requireById(id: string): Promise<RestockRequest> {
+      const request = await this.getById(id);
+
+      if (!request) {
+        throw new AppError("The restock request was not found.", "NOT_FOUND", 404);
+      }
+
+      return request;
+    },
+
     async listByItem(inventoryItemId: string): Promise<RestockRequest[]> {
       const { data, error } = await client
         .from("restock_requests")
@@ -28,33 +40,6 @@ export function createRestockRequestRepository(client: StockSignalDatabaseClient
       }
 
       return (data ?? []).map(mapRestockRequest);
-    },
-
-    async create(input: CreateRestockRequestInput): Promise<RestockRequest> {
-      const { data, error } = await client
-        .from("restock_requests")
-        .insert({
-          inventory_item_id: input.inventoryItemId,
-          requested_quantity: Number(quantityToDatabase(input.requestedQuantity)),
-          supplier_name: input.supplierName,
-          supplier_phone: input.supplierPhone,
-          notification_id: input.notificationId ?? null,
-        })
-        .select("*")
-        .single();
-
-      return mapRestockRequest(requireData(data, error, "The restock request could not be created."));
-    },
-
-    async linkNotification(id: string, notificationId: string): Promise<RestockRequest> {
-      const { data, error } = await client
-        .from("restock_requests")
-        .update({ notification_id: notificationId })
-        .eq("id", id)
-        .select("*")
-        .single();
-
-      return mapRestockRequest(requireData(data, error, "The restock request could not be updated."));
     },
   };
 }

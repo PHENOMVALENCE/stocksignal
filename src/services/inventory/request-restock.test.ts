@@ -54,6 +54,7 @@ describe("requestRestock", () => {
         requestedQuantity: "50",
         supplierName: "Demo Mill",
         supplierPhone: "+254700000002",
+        unit: "metres",
       },
       {
         items: { requireById: async () => ({ ...item, quantity: 40 }) } as never,
@@ -71,15 +72,21 @@ describe("requestRestock", () => {
         requestedQuantity: "50",
         supplierName: "Demo Mill",
         supplierPhone: "+254700000002",
+        unit: "metres",
       },
       {
         items: { requireById: async () => item } as never,
         requests: {
           listByItem: async () => [],
-          create: async () => request,
+          requireById: async () => request,
+        } as never,
+        rpc: {
+          createRequest: async () => ({
+            restockRequestId: request.id,
+            notificationId: notification.id,
+          }),
         } as never,
         notifications: {
-          create: async () => ({ ...notification, status: "PENDING", providerMessageId: null }),
           getById: async () => notification,
         } as never,
         deliver: async () => ({ notification, delivered: true }),
@@ -98,6 +105,7 @@ describe("requestRestock", () => {
         requestedQuantity: "50",
         supplierName: "Demo Mill",
         supplierPhone: "+254700000002",
+        unit: "metres",
       },
       {
         items: { requireById: async () => item } as never,
@@ -113,12 +121,31 @@ describe("requestRestock", () => {
     expect(result.request?.id).toBe(request.id);
   });
 
+  it("rejects a unit that does not match the material", async () => {
+    const result = await requestRestock(
+      {
+        inventoryItemId: item.id,
+        requestedQuantity: "50",
+        supplierName: "Demo Mill",
+        supplierPhone: "+254700000002",
+        unit: "kg",
+      },
+      {
+        items: { requireById: async () => item } as never,
+      },
+    );
+
+    expect(result.request).toBeUndefined();
+    expect(result.fieldErrors?.unit).toMatch(/does not match the material unit/);
+  });
+
   it("requires a positive requested quantity", async () => {
     const result = await requestRestock({
       inventoryItemId: item.id,
       requestedQuantity: "0",
       supplierName: "Demo Mill",
       supplierPhone: "+254700000002",
+      unit: "metres",
     });
 
     expect(result.fieldErrors?.requestedQuantity).toMatch(/greater than zero/);

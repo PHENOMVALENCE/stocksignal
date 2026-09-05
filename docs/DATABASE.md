@@ -39,4 +39,6 @@ All public tables have RLS enabled with no permissive policies. This denies brow
 
 `public.apply_stock_movement` locks the inventory row with `FOR UPDATE`, validates the operation, updates quantity and `alert_active`, and inserts the movement in one transaction. SMS is attempted after that transaction and recorded separately so provider failures do not corrupt stock history.
 
+`public.create_restock_request` locks the inventory row, validates the item, unit, requested quantity, supplier name, and phone number, then inserts the pending `RESTOCK_REQUEST` notification and the restock request in the same transaction. A failure cannot leave one record without the other. SMS delivery still happens after commit.
+
 Before applying the schema, review it in the Supabase SQL editor or convert it into a timestamped CLI migration, then run Supabase database advisors.

@@ -75,10 +75,20 @@ class QueryBuilder {
   }
 }
 
-export function createFakeClient(handler: (table: string, builder: QueryBuilder) => QueryResult | Promise<QueryResult>) {
+export function createFakeClient(
+  handler: (table: string, builder: QueryBuilder) => QueryResult | Promise<QueryResult>,
+  rpcHandler?: (fn: string, params: Record<string, unknown>) => QueryResult | Promise<QueryResult>,
+) {
   return {
     from(table: string) {
       return new QueryBuilder(table, handler);
+    },
+    async rpc(fn: string, params: Record<string, unknown>) {
+      if (!rpcHandler) {
+        return { data: null, error: { message: "RPC is not stubbed." } };
+      }
+
+      return rpcHandler(fn, params);
     },
   } as unknown as StockSignalDatabaseClient;
 }

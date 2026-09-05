@@ -13,6 +13,7 @@ export async function requestRestockAction(_: ActionState, formData: FormData): 
       requestedQuantity: String(formData.get("requestedQuantity") ?? ""),
       supplierName: String(formData.get("supplierName") ?? ""),
       supplierPhone: String(formData.get("supplierPhone") ?? ""),
+      unit: String(formData.get("unit") ?? ""),
     });
 
     if (!result.request) {

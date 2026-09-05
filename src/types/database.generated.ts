@@ -219,6 +219,20 @@ export type Database = {
           previous_quantity: number
         }[]
       }
+      create_restock_request: {
+        Args: {
+          p_inventory_item_id: string
+          p_message: string
+          p_requested_quantity: number
+          p_supplier_name: string
+          p_supplier_phone: string
+          p_unit: string
+        }
+        Returns: {
+          notification_id: string
+          restock_request_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
