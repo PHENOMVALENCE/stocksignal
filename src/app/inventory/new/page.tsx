@@ -12,7 +12,7 @@ export default function NewInventoryPage() {
         </Link>
       }
       description="Name, SKU, unit, opening quantity, reorder level, and the manager who should receive low-stock alerts."
-      eyebrow="Materials"
+      eyebrow="StockSignal"
       title="Add material"
     >
       <CreateInventoryForm />

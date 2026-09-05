@@ -1,4 +1,4 @@
-# StockSignal Agent Instructions
+# MFGFlow Agent Instructions
 
 ## Mission
 

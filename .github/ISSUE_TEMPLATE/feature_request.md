@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Propose a scoped StockSignal capability
+about: Propose a scoped MFGFlow or StockSignal capability
 title: "feat: "
 labels: enhancement
 ---
