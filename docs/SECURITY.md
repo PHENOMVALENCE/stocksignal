@@ -12,3 +12,15 @@
 - Pin dependencies through `package-lock.json`, monitor advisories, and review transitive risks.
 
 The baseline schema enables RLS and grants no data policies. Server-only privileged access is the temporary foundation posture, not a final authorization design.
+
+## Dependency policy
+
+`npm audit` must report zero known vulnerabilities on `main`.
+
+The Africa's Talking SDK pins older `axios`, `lodash`, and `joi` releases that
+carry published advisories. Because the fixes exist upstream within the same
+major version, `package.json` lifts them with `overrides` rather than
+downgrading the SDK, which `npm audit fix --force` would otherwise do without
+resolving the advisories. The SDK is verified to initialize against the lifted
+versions. Revisit the overrides whenever the SDK is upgraded.
+

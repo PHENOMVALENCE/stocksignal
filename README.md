@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StockSignal
 
-## Getting Started
+**Inventory intelligence for manufacturers.**
 
-First, run the development server:
+StockSignal is a lightweight manufacturing inventory and communication platform designed primarily for small and medium manufacturers in Africa. It tracks critical raw materials, identifies reorder conditions, and uses Africa's Talking channels to help teams act before shortages stop production.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Problem
+
+Manufacturers often track stock across notebooks or disconnected spreadsheets. A shortage may become visible only when a production task is already blocked, while the responsible manager or supplier is away from a computer.
+
+## Solution
+
+StockSignal pairs a clear inventory record with event-driven communication. A stock movement updates the balance; crossing a configured reorder threshold creates one manager alert; replenishment resets the signal; and a later shortage can alert again. Managers can then initiate a supplier restock request by SMS.
+
+## Project status
+
+**Implemented — engineering foundation**
+
+- Next.js 16 App Router, React 19, strict TypeScript, Tailwind CSS, and ESLint
+- Responsive product shell and deployment health endpoint
+- Pure stock calculation and duplicate-alert rules with unit tests
+- Lazy server-side environment validation
+- Supabase schema design with constraints, indexes, and RLS enabled
+- Africa's Talking server adapter boundary
+- Production Docker image and GitHub Actions validation
+- Product, architecture, security, development, and demo documentation
+
+**Planned — P0 MVP**
+
+- Supabase-backed inventory CRUD and transactional stock movements
+- Persistent threshold transitions and notification history
+- Live Africa's Talking low-stock SMS
+- Supplier restock-request workflow and demo seed data
+
+**Future**
+
+- USSD interaction, authentication, multi-location operations, analytics, forecasting, and additional communications channels
+
+## How it works
+
+```text
+Manager -> Next.js UI -> server action / route -> domain service
+                                              |-> Supabase PostgreSQL
+                                              `-> Africa's Talking SMS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+StockSignal is a modular monolith. Browser code never receives privileged Supabase or Africa's Talking credentials. Valid inventory transactions are persisted before an SMS attempt so a provider outage does not erase stock history.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js App Router, React, TypeScript, Tailwind CSS
+- Supabase/PostgreSQL
+- Africa's Talking Node.js SDK
+- Zod and Vitest
+- Docker and GitHub Actions
 
-## Learn More
+## Repository structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/app/                         UI routes and route handlers
+src/components/                  focused UI components
+src/lib/                         environment and database primitives
+src/services/inventory/          stock domain rules
+src/services/africas-talking/    server-only SMS adapter
+supabase/schema.sql              reviewable MVP database schema
+docs/                            product and engineering documentation
+.github/                         CI and contribution templates
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Getting started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Requirements: Git, Node.js 24 LTS, and npm. Docker Desktop is needed only for container validation. Supabase and Africa's Talking accounts are needed for live integrations.
 
-## Deploy on Vercel
+```bash
+git clone https://github.com/PHENOMVALENCE/stocksignal.git
+cd stocksignal
+git switch codex-master-changes
+npm ci
+cp .env.example .env.local
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open `http://localhost:3000`. The initial shell builds without real external credentials.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment variables
+
+`.env.example` lists placeholders for the public application URL, Supabase URL and keys, and Africa's Talking username, API key, and optional sender ID. Never commit `.env.local`. See `docs/ENVIRONMENT.md` for visibility and requirement details.
+
+## Quality checks
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+## Docker
+
+```bash
+docker build -t stocksignal .
+docker run --rm --env-file .env.local -p 3000:3000 stocksignal
+```
+
+Check `http://localhost:3000/api/health`. See `docs/DOCKER.md` for the production image design.
+
+## Development workflow
+
+Do not work directly on `main`. Use focused branches and Conventional Commit-style messages, run the complete quality gate, update affected documentation, and open a pull request for human review. Read `AGENTS.md` and `CONTRIBUTING.md` before implementing features.
+
+## Roadmap and demo
+
+The P0 roadmap centers on inventory CRUD, transactional movements, threshold detection, Africa's Talking SMS, restock requests, and notification history. `docs/DEMO.md` defines a reproducible Cotton Fabric scenario for hackathon judging.
+
+## Documentation
+
+- [Product specification](docs/PROJECT_SPEC.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Roadmap](docs/ROADMAP.md) and [task checklist](docs/TASKS.md)
+- [Database](docs/DATABASE.md) and [environment](docs/ENVIRONMENT.md)
+- [Africa's Talking](docs/AFRICAS_TALKING.md)
+- [Development](docs/DEVELOPMENT.md), [testing](docs/TESTING.md), and [Docker](docs/DOCKER.md)
+- [Security](docs/SECURITY.md), [design](docs/DESIGN.md), and [decisions](docs/DECISIONS.md)
+- [Project status](docs/STATUS.md), [demo](docs/DEMO.md), and [official resources](docs/RESOURCES.md)
+
+## Hackathon focus
+
+The primary MVP proves two outcomes: one reliable low-stock SMS per threshold event, and a supplier restock request initiated from a low-stock item. SMS comes first; USSD is the next high-value enhancement.

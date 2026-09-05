@@ -1,4 +1,9 @@
 -- StockSignal MVP schema. Review before applying to a Supabase project.
+--
+-- Row Level Security is enabled on every table and no policy is defined, so
+-- anon and authenticated roles are denied by default. All access goes through
+-- the server using the service role key, which bypasses RLS. Add explicit
+-- policies here when end-user authentication is introduced.
 
 create table if not exists public.inventory_items (
   id uuid primary key default gen_random_uuid(),
@@ -19,11 +24,16 @@ create table if not exists public.stock_movements (
   id uuid primary key default gen_random_uuid(),
   inventory_item_id uuid not null references public.inventory_items(id) on delete restrict,
   type text not null check (type in ('STOCK_IN', 'STOCK_OUT', 'ADJUSTMENT')),
-  quantity numeric(14, 3) not null check (quantity > 0),
+  quantity numeric(14, 3) not null check (quantity >= 0),
   previous_quantity numeric(14, 3) not null check (previous_quantity >= 0),
   new_quantity numeric(14, 3) not null check (new_quantity >= 0),
   notes text,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  -- STOCK_IN and STOCK_OUT are relative and must move a positive amount.
+  -- ADJUSTMENT records the counted absolute balance, which may be zero.
+  constraint stock_movements_quantity_by_type check (
+    type = 'ADJUSTMENT' or quantity > 0
+  )
 );
 
 create table if not exists public.notifications (
@@ -69,3 +79,26 @@ comment on table public.inventory_items is 'Manufacturing raw-material balances 
 comment on table public.stock_movements is 'Immutable audit trail for inventory balance changes.';
 comment on table public.notifications is 'Outbound notification attempts and provider outcomes.';
 comment on table public.restock_requests is 'Supplier replenishment requests initiated by managers.';
+
+-- Keep updated_at truthful; the column default only covers insert.
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  new.updated_at := now();
+  return new;
+end;
+$$;
+
+drop trigger if exists inventory_items_set_updated_at on public.inventory_items;
+create trigger inventory_items_set_updated_at
+  before update on public.inventory_items
+  for each row execute function public.set_updated_at();
+
+drop trigger if exists restock_requests_set_updated_at on public.restock_requests;
+create trigger restock_requests_set_updated_at
+  before update on public.restock_requests
+  for each row execute function public.set_updated_at();
