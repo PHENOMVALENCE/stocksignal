@@ -3,7 +3,7 @@
 ## MFGFlow order-to-production
 
 - [x] Product specification, domain model, implementation phases, and agent prompt
-- [ ] MF-00 MFGFlow product shell
+- [x] MF-00 MFGFlow product shell
 - [ ] MF-01 organizations, authentication, and RLS
 - [ ] MF-02 customers
 - [ ] MF-03 products

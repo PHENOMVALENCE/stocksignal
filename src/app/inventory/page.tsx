@@ -18,8 +18,8 @@ export default async function InventoryPage() {
           Add material
         </Link>
       }
-      description="Materials, quantities, and reorder status from the live inventory record."
-      eyebrow="Materials"
+      description="StockSignal tracks materials, quantities, and reorder status from the live inventory record."
+      eyebrow="StockSignal"
       title="Inventory"
     >
       {!result.ok ? (

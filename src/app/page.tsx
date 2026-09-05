@@ -21,8 +21,8 @@ export default async function DashboardPage() {
   if (!result.ok) {
     return (
       <AppShell
-        description="Live counts come from the inventory record. No sample metrics are shown."
-        eyebrow="Operations"
+        description="Live counts come from the StockSignal inventory record. No sample metrics are shown."
+        eyebrow="MFGFlow"
         title="Dashboard"
       >
         <ErrorState
@@ -42,8 +42,8 @@ export default async function DashboardPage() {
           Add material
         </Link>
       }
-      description="Action-required materials and the latest recorded movements. Counts are calculated from persisted inventory."
-      eyebrow="Operations"
+      description="Action-required materials and the latest recorded movements from the StockSignal inventory module. Counts are calculated from persisted inventory."
+      eyebrow="MFGFlow"
       title="Dashboard"
     >
       <section className="grid gap-px border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2">

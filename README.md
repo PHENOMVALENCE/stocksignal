@@ -17,7 +17,7 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 **Implemented — P0 MVP**
 
 - Next.js 16 App Router, React 19, strict TypeScript, Tailwind CSS, and ESLint
-- Responsive product shell and deployment health endpoint
+- MFGFlow product shell with StockSignal as the inventory module, plus a deployment health endpoint
 - Pure stock calculation and duplicate-alert rules with unit tests
 - Lazy server-side environment validation
 - Supabase schema design with constraints, indexes, and RLS enabled
@@ -27,7 +27,7 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 
 **Planned — next**
 
-- MFGFlow product shell and organization-scoped authentication
+- Organization-scoped authentication
 - Customers, products, bills of materials, and customer orders
 - Order material planning and shortage recommendations
 - Production tracking, quality checks, and delivery readiness
@@ -44,7 +44,7 @@ Manager -> Next.js UI -> server action / route -> domain service
                                               `-> Africa's Talking SMS
 ```
 
-StockSignal is a modular monolith. Browser code never receives privileged Supabase or Africa's Talking credentials. Valid inventory transactions are persisted before an SMS attempt so a provider outage does not erase stock history.
+MFGFlow is a modular monolith; StockSignal is its inventory module. Browser code never receives privileged Supabase or Africa's Talking credentials. Valid inventory transactions are persisted before an SMS attempt so a provider outage does not erase stock history.
 
 ## Tech stack
 
