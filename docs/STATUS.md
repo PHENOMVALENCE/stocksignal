@@ -2,7 +2,7 @@
 
 ## Current phase
 
-P0 MVP — F01–F06 complete
+P0 MVP — F01–F07 complete
 
 ## Implemented
 
@@ -20,6 +20,7 @@ P0 MVP — F01–F06 complete
 - Persistent low-stock transitions with one pending manager notification per crossing
 - Africa's Talking SMS delivery after commit, with sanitized SENT/FAILED audit and bounded retry
 - Supplier restock requests from low-stock items, linked to notification history
+- Operations dashboard and filterable notification history from persisted data
 
 ## Verified
 
@@ -31,8 +32,8 @@ instance including the `updated_at` triggers and movement constraints.
 ## Next
 
 1. Configure a Supabase project and apply `supabase/migrations`.
-2. Add the operations dashboard and notification history (F07).
-4. Add optional USSD flows.
+2. Add Africa's Talking credentials for live demo SMS.
+3. Add optional authentication (F08) and USSD (F09).
 
 ## Blockers
 

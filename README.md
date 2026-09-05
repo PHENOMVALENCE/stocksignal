@@ -14,7 +14,7 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 
 ## Project status
 
-**Implemented — engineering foundation**
+**Implemented — P0 MVP**
 
 - Next.js 16 App Router, React 19, strict TypeScript, Tailwind CSS, and ESLint
 - Responsive product shell and deployment health endpoint
@@ -25,12 +25,11 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 - Production Docker image and GitHub Actions validation
 - Product, architecture, security, development, and demo documentation
 
-**Planned — P0 MVP**
+**Planned — next**
 
-- Supabase-backed inventory CRUD and transactional stock movements
-- Persistent threshold transitions and notification history
-- Live Africa's Talking low-stock SMS
-- Supplier restock-request workflow and demo seed data
+- Authentication and organization-scoped RLS
+- USSD inventory workflow
+- Demo seed data on a linked Supabase project
 
 **Future**
 

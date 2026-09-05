@@ -6,6 +6,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { StockSignalDatabaseClient } from "@/lib/supabase/types";
 import { mapDatabaseError, requireData } from "@/repositories/errors";
 import { mapInventoryItem, type InventoryItem } from "@/repositories/mappers";
+import { compareLowStockUrgency } from "@/services/inventory/urgency";
 import type { Database } from "@/types/database";
 
 export interface CreateInventoryItemInput {
@@ -86,18 +87,7 @@ export function createInventoryItemRepository(client: StockSignalDatabaseClient 
 
     async listLowStock(): Promise<InventoryItem[]> {
       const items = await this.list();
-      return items
-        .filter((item) => item.quantity <= item.reorderLevel)
-        .sort((left, right) => {
-          const leftRatio = left.reorderLevel === 0 ? left.quantity : left.quantity / left.reorderLevel;
-          const rightRatio = right.reorderLevel === 0 ? right.quantity : right.quantity / right.reorderLevel;
-
-          if (leftRatio !== rightRatio) {
-            return leftRatio - rightRatio;
-          }
-
-          return left.quantity - right.quantity;
-        });
+      return items.filter((item) => item.quantity <= item.reorderLevel).sort(compareLowStockUrgency);
     },
   };
 }
