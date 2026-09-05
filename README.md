@@ -14,7 +14,7 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 
 ## Project status
 
-**Implemented — engineering foundation**
+**Implemented — P0 MVP**
 
 - Next.js 16 App Router, React 19, strict TypeScript, Tailwind CSS, and ESLint
 - Responsive product shell and deployment health endpoint
@@ -25,12 +25,11 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 - Production Docker image and GitHub Actions validation
 - Product, architecture, security, development, and demo documentation
 
-**Planned — P0 MVP**
+**Planned — next**
 
-- Supabase-backed inventory CRUD and transactional stock movements
-- Persistent threshold transitions and notification history
-- Live Africa's Talking low-stock SMS
-- Supplier restock-request workflow and demo seed data
+- Authentication and organization-scoped RLS
+- USSD inventory workflow
+- Demo seed data on a linked Supabase project
 
 **Future**
 
@@ -62,7 +61,10 @@ src/components/                  focused UI components
 src/lib/                         environment and database primitives
 src/services/inventory/          stock domain rules
 src/services/africas-talking/    server-only SMS adapter
+supabase/migrations/             timestamped CLI migrations
 supabase/schema.sql              reviewable MVP database schema
+src/repositories/                server-only typed data access
+src/types/database.ts            generated-style Database types
 docs/                            product and engineering documentation
 .github/                         CI and contribution templates
 ```
@@ -118,9 +120,10 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 - [Architecture](docs/ARCHITECTURE.md)
 - [Roadmap](docs/ROADMAP.md) and [task checklist](docs/TASKS.md)
 - [Build-ready feature backlog](docs/FEATURE_BACKLOG.md) and [Cursor implementation prompt](docs/CURSOR_IMPLEMENTATION_PROMPT.md)
-- [Database](docs/DATABASE.md) and [environment](docs/ENVIRONMENT.md)
+- [Current implementation review](docs/IMPLEMENTATION_REVIEW.md)
+- [Database design](docs/DATABASE.md), [Supabase setup](docs/SUPABASE_SETUP.md), and [environment](docs/ENVIRONMENT.md)
 - [Africa's Talking](docs/AFRICAS_TALKING.md)
-- [Development](docs/DEVELOPMENT.md), [testing](docs/TESTING.md), and [Docker](docs/DOCKER.md)
+- [Development](docs/DEVELOPMENT.md), [coding-agent workflow](docs/AGENT_WORKFLOW.md), [testing](docs/TESTING.md), and [Docker](docs/DOCKER.md)
 - [Security](docs/SECURITY.md), [design](docs/DESIGN.md), and [decisions](docs/DECISIONS.md)
 - [Project status](docs/STATUS.md), [demo](docs/DEMO.md), and [official resources](docs/RESOURCES.md)
 

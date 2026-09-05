@@ -1,6 +1,28 @@
 # Database Design
 
-The planned Supabase/PostgreSQL schema is defined in `supabase/schema.sql`. It is intentionally not applied to a remote project by this foundation.
+The reviewed Supabase/PostgreSQL schema lives in `supabase/schema.sql` and is applied as a timestamped CLI migration in `supabase/migrations/`. Privileged application access uses typed server-only repositories; browser clients receive no service-role key and no permissive RLS policies.
+
+## Apply locally or remotely
+
+See `docs/SUPABASE_SETUP.md` for the complete command-by-command process, environment mapping, migration workflow, safety warnings, and troubleshooting.
+
+```bash
+# Local Supabase (Docker)
+npx supabase start
+npx supabase db reset
+
+# Linked remote project
+npx supabase link --project-ref <project-ref>
+npx supabase db push
+```
+
+Regenerate types after a schema change:
+
+```bash
+npm run db:types
+```
+
+The generated `src/types/database.generated.ts` file matches the MVP schema so builds do not require a live project. Stable domain aliases live in `src/types/database.ts` and are not overwritten by type generation.
 
 ## Tables
 
@@ -15,6 +37,6 @@ All public tables have RLS enabled with no permissive policies. This denies brow
 
 ## Transactional movement plan
 
-Production movement writes should use a database transaction/RPC to lock the inventory row, validate the operation, update the balance and alert state, and insert the movement. SMS is attempted after that transaction and recorded separately so provider failures do not corrupt stock history.
+`public.apply_stock_movement` locks the inventory row with `FOR UPDATE`, validates the operation, updates quantity and `alert_active`, and inserts the movement in one transaction. SMS is attempted after that transaction and recorded separately so provider failures do not corrupt stock history.
 
 Before applying the schema, review it in the Supabase SQL editor or convert it into a timestamped CLI migration, then run Supabase database advisors.

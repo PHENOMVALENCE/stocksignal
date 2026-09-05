@@ -31,6 +31,19 @@ npm test
 npm run build
 ```
 
+## Database
+
+The Supabase CLI is pinned in the project. For local development:
+
+```bash
+npm run db:start
+npm run db:reset
+npm run db:lint
+npm run db:types
+```
+
+Follow `docs/SUPABASE_SETUP.md` before linking or modifying a hosted project.
+
 ## Docker
 
 ```bash

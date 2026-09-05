@@ -9,4 +9,14 @@ body { background: var(--background); color: var(--foreground); font-family: var
   .button-primary { @apply inline-flex min-h-12 items-center justify-center bg-[var(--ink)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-dark)]; }
   .button-secondary { @apply inline-flex min-h-12 items-center justify-center border border-[var(--ink)] px-6 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-dark)]; }
   .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-dark)]; }
+  .field-label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]; }
+  .field-input { @apply min-h-12 w-full border border-[var(--line)] bg-[var(--surface)] px-3 text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-dark)]; }
+  .data-table { @apply w-full min-w-[40rem] border-collapse text-left text-sm; }
+  .data-table th { @apply border-b border-[var(--line)] bg-[var(--surface)] px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]; }
+  .data-table td,
+  .data-table tbody th { @apply border-b border-[var(--line)] px-4 py-3 font-normal; }
+  .quantity-cell,
+  .quantity-display { @apply font-semibold tabular-nums tracking-[-0.02em]; }
+  .quantity-display { @apply text-3xl; }
+  .unit-label { @apply font-normal text-[var(--muted)]; }
 }

@@ -12,22 +12,25 @@
 
 ## Inventory
 
+- [x] CLI migration, typed definitions, and server-only repositories
 - [ ] Database migration applied to a configured project
-- [ ] List, create, and update items
-- [ ] Stock in, stock out, and adjustments
-- [ ] Movement history
+- [x] List and create items
+- [ ] Update items
+- [x] Stock in, stock out, and adjustments
+- [x] Movement history
 
 ## Signals
 
 - [x] Pure threshold and alert-state rules
-- [ ] SMS provider connected to configured credentials
-- [ ] Low-stock notification persistence and failure handling
+- [x] SMS provider connected to configured credentials
+- [x] Low-stock notification persistence
+- [x] SMS failure handling
 
 ## Restocking
 
-- [ ] Supplier information UI
-- [ ] Requested quantity and supplier SMS
-- [ ] Request status/history
+- [x] Supplier information UI
+- [x] Requested quantity and supplier SMS
+- [x] Request status/history
 
 ## Optional USSD
 

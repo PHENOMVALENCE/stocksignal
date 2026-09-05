@@ -22,11 +22,14 @@ StockSignal is a production-minded manufacturing stock-monitoring platform using
 ## Git rules
 
 - Never work directly on `main`.
-- Default implementation branch: `codex-master-changes`.
+- Create a focused session branch from the current approved base branch.
 - Make small, coherent commits using Conventional Commit-style messages.
-- Never commit as Codex, OpenAI, or AI and never add AI co-author trailers.
+- Every commit must be authored only as `Valence Mwigani <phenomenalvalence@gmail.com>`.
+- Never add Cursor, Codex, OpenAI, AI, bot, agent, generated-by, or co-author attribution.
+- Verify commit author and body after every commit.
+- At the end of every coding session, push the session branch and open one focused pull request.
 - Never merge pull requests automatically.
-- Push the working branch and open a pull request for Valence to review.
+- Follow the complete procedure in `docs/AGENT_WORKFLOW.md`.
 
 ## Before modifying code
 
@@ -39,6 +42,7 @@ Inspect:
 - `docs/ROADMAP.md`
 - `docs/DEVELOPMENT.md`
 - `docs/SECURITY.md`
+- `docs/AGENT_WORKFLOW.md`
 
 ## Before committing
 

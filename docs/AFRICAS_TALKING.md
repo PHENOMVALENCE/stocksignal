@@ -24,4 +24,6 @@ Every attempt should create or update a notification record with provider, recip
 
 Use `AT_USERNAME`, `AT_API_KEY`, and optional `AT_SENDER_ID`. Sandbox may use `AT_USERNAME=sandbox`, but no environment is assumed in code. Never import the adapter from a client component, log credentials, or expose raw provider failures to users.
 
+Pending notifications are sent only after the inventory transaction commits. A missing `AT_USERNAME` or `AT_API_KEY` produces a configuration error at send time, the notification is marked `FAILED`, and the stock movement remains valid. Delivery retries are capped at three attempts.
+
 Initial implementation should mock the wrapper in integration tests. Live sandbox validation should be performed only after the owner supplies credentials.

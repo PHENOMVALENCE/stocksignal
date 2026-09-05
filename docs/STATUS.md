@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Engineering Foundation
+P0 MVP — F01–F07 complete
 
 ## Implemented
 
@@ -14,6 +14,13 @@ Engineering Foundation
 - Production Docker configuration and GitHub validation workflows
 - Schema verified to apply cleanly and idempotently against PostgreSQL 16
 - Zero known dependency vulnerabilities
+- Timestamped Supabase CLI migration, typed Database definitions, and server-only repositories
+- Inventory list, empty/error states, and validated material creation
+- Transactional stock-in, stock-out, and adjustment RPC with movement history
+- Persistent low-stock transitions with one pending manager notification per crossing
+- Africa's Talking SMS delivery after commit, with sanitized SENT/FAILED audit and bounded retry
+- Supplier restock requests from low-stock items, linked to notification history
+- Operations dashboard and filterable notification history from persisted data
 
 ## Verified
 
@@ -24,13 +31,9 @@ instance including the `updated_at` triggers and movement constraints.
 
 ## Next
 
-1. Configure a Supabase project and apply the verified schema.
-2. Implement inventory CRUD.
-3. Implement transactional stock movements.
-4. Persist threshold state and notification attempts.
-5. Connect Africa's Talking SMS.
-6. Implement supplier restock requests and notification history.
-7. Add optional USSD flows.
+1. Configure a Supabase project and apply `supabase/migrations`.
+2. Add Africa's Talking credentials for live demo SMS.
+3. Add optional authentication (F08) and USSD (F09).
 
 ## Blockers
 
