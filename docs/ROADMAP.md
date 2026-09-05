@@ -1,5 +1,16 @@
 # Roadmap
 
+The original StockSignal inventory roadmap remains the foundation. New order-to-production work follows the numbered vertical slices in `MFGFLOW_IMPLEMENTATION_PLAN.md`.
+
+## MFGFlow hackathon path
+
+- Product alignment and organization-scoped authentication
+- Customers, products, versioned bills of materials, and draft orders
+- Deterministic material requirements, shortage analysis, and order confirmation
+- Production jobs, stage history, and linked material consumption
+- Versioned quality checklists, inspections, and delivery readiness
+- Evidence-backed recommendations, operational dashboard, and demo data
+
 ## P0 — Hackathon core
 
 - Project foundation, Docker, CI, documentation, and demo-ready seed data
@@ -25,6 +36,6 @@
 - Demand forecasting and predictive reorder recommendations
 - Voice and WhatsApp alerts
 - M-Pesa procurement/payment flow and supplier marketplace
-- IoT stock sensors and production-planning integration
+- IoT stock sensors and advanced production planning
 
 Do not implement P2 or P3 during initial setup unless specifically requested.

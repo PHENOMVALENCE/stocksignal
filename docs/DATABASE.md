@@ -1,5 +1,7 @@
 # Database Design
 
+This document covers the implemented StockSignal tables and RPCs. The incremental MFGFlow target schema and transaction boundaries are defined in `MFGFLOW_DOMAIN_MODEL.md`.
+
 The reviewed Supabase/PostgreSQL schema lives in `supabase/schema.sql` and is applied as a timestamped CLI migration in `supabase/migrations/`. Privileged application access uses typed server-only repositories; browser clients receive no service-role key and no permissive RLS policies.
 
 ## Apply locally or remotely

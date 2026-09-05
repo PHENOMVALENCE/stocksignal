@@ -2,7 +2,7 @@
 
 ## Mission
 
-StockSignal is a production-minded manufacturing stock-monitoring platform using Next.js, TypeScript, Supabase, Africa's Talking, and Docker.
+MFGFlow is a production-minded order-to-production platform for African manufacturers. StockSignal is its inventory and shortage-signal module. The system uses Next.js, TypeScript, Supabase, Africa's Talking, and Docker.
 
 ## Non-negotiable engineering rules
 
@@ -38,6 +38,9 @@ Inspect:
 - `AGENTS.md`
 - `README.md`
 - `docs/PROJECT_SPEC.md`
+- `docs/MFGFLOW_PRODUCT_SPEC.md`
+- `docs/MFGFLOW_DOMAIN_MODEL.md`
+- `docs/MFGFLOW_IMPLEMENTATION_PLAN.md`
 - `docs/ARCHITECTURE.md`
 - `docs/ROADMAP.md`
 - `docs/DEVELOPMENT.md`

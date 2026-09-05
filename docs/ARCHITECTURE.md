@@ -1,7 +1,7 @@
 # Architecture
 
 ```text
-User
+Manager
   |
   v
 Next.js UI
@@ -9,20 +9,19 @@ Next.js UI
   v
 Next.js server layer
   |
-  +--------------------------+
-  |                          |
-  v                          v
-Supabase PostgreSQL     Africa's Talking
-                           |
-                    +------+------+
-                    |             |
-                   SMS           USSD
-                              (future)
+  +--> orders / planning / production / quality / recommendations
+  |                                |
+  |                                v
+  +--> StockSignal inventory --> Supabase PostgreSQL
+  |
+  `--> notification service --> Africa's Talking SMS
 ```
 
 ## Shape
 
-StockSignal is a modular monolith: one Next.js deployment with UI, route handlers/server actions, domain services, and external adapters. This keeps the hackathon system easy to run and debug without blocking later module boundaries.
+MFGFlow is a modular monolith: one Next.js deployment with UI, route handlers/server actions, domain services, and external adapters. StockSignal is its inventory module. This keeps the hackathon system easy to run and debug without blocking clear order, planning, production, quality, recommendation, and notification boundaries.
+
+Order-to-production state flows forward through explicit server-enforced transitions. Multi-record transitions use PostgreSQL RPCs. Historical BOM requirements, production events, and quality results are snapshots or immutable events so later configuration edits do not rewrite completed work.
 
 Browser components display state and submit user intent. Server actions handle first-party UI mutations; route handlers expose health checks and future callbacks. Domain services own inventory and alert rules. Server-only adapters isolate Supabase privileged access and Africa's Talking credentials.
 
@@ -35,6 +34,10 @@ SMS delivery is deliberately outside the inventory transaction. The reliable seq
 ## Notification boundary
 
 Notification services accept domain messages and return normalized provider results. Provider-specific response shapes stay inside `src/services/africas-talking`. The `alert_active` state suppresses repeated low-stock alerts and resets only after stock rises above the reorder level.
+
+## Recommendation boundary
+
+Domain services calculate quantities, shortages, due-date risk, production state, and quality gates deterministically. Recommendations cite those persisted facts. A later AI adapter may summarize structured evidence, but it cannot invent operational facts or mutate orders, inventory, jobs, or inspections.
 
 ## Packaging and deployment
 
