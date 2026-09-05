@@ -14,7 +14,8 @@
 
 - [x] CLI migration, typed definitions, and server-only repositories
 - [ ] Database migration applied to a configured project
-- [ ] List, create, and update items
+- [x] List and create items
+- [ ] Update items
 - [ ] Stock in, stock out, and adjustments
 - [ ] Movement history
 

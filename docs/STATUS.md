@@ -2,7 +2,7 @@
 
 ## Current phase
 
-P0 MVP — F01 complete
+P0 MVP — F01–F02 complete
 
 ## Implemented
 
@@ -15,6 +15,7 @@ P0 MVP — F01 complete
 - Schema verified to apply cleanly and idempotently against PostgreSQL 16
 - Zero known dependency vulnerabilities
 - Timestamped Supabase CLI migration, typed Database definitions, and server-only repositories
+- Inventory list, empty/error states, and validated material creation
 
 ## Verified
 
@@ -26,8 +27,7 @@ instance including the `updated_at` triggers and movement constraints.
 ## Next
 
 1. Configure a Supabase project and apply `supabase/migrations`.
-2. Implement inventory list and material creation (F02).
-3. Implement transactional stock movements.
+2. Implement transactional stock movements (F03).
 4. Persist threshold state and notification attempts.
 5. Connect Africa's Talking SMS.
 6. Implement supplier restock requests and notification history.
