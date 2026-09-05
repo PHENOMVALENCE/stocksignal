@@ -8,7 +8,16 @@ const itemId = "11111111-1111-4111-8111-111111111111";
 describe("recordStockMovement", () => {
   it("records previous and new quantities for a stock-out", async () => {
     const store = new MemoryStockStore([
-      { id: itemId, quantity: 50, reorderLevel: 15, alertActive: false, updatedAt: "2026-09-05T05:00:00.000Z" },
+      {
+        id: itemId,
+        name: "Cotton Fabric",
+        unit: "metres",
+        quantity: 50,
+        reorderLevel: 15,
+        managerPhone: "+254712345678",
+        alertActive: false,
+        updatedAt: "2026-09-05T05:00:00.000Z",
+      },
     ]);
 
     const result = await recordStockMovement(
@@ -24,7 +33,16 @@ describe("recordStockMovement", () => {
 
   it("rejects a stock-out that would go negative", async () => {
     const store = new MemoryStockStore([
-      { id: itemId, quantity: 10, reorderLevel: 15, alertActive: true, updatedAt: "2026-09-05T05:00:00.000Z" },
+      {
+        id: itemId,
+        name: "Cotton Fabric",
+        unit: "metres",
+        quantity: 10,
+        reorderLevel: 15,
+        managerPhone: "+254712345678",
+        alertActive: true,
+        updatedAt: "2026-09-05T05:00:00.000Z",
+      },
     ]);
 
     await expect(store.apply({ inventoryItemId: itemId, type: "STOCK_OUT", quantity: 11 })).rejects.toThrow(
@@ -34,7 +52,16 @@ describe("recordStockMovement", () => {
 
   it("allows an adjustment to zero", async () => {
     const store = new MemoryStockStore([
-      { id: itemId, quantity: 8, reorderLevel: 15, alertActive: true, updatedAt: "2026-09-05T05:00:00.000Z" },
+      {
+        id: itemId,
+        name: "Cotton Fabric",
+        unit: "metres",
+        quantity: 8,
+        reorderLevel: 15,
+        managerPhone: "+254712345678",
+        alertActive: true,
+        updatedAt: "2026-09-05T05:00:00.000Z",
+      },
     ]);
 
     const result = await store.apply({ inventoryItemId: itemId, type: "ADJUSTMENT", quantity: 0 });
@@ -43,7 +70,16 @@ describe("recordStockMovement", () => {
 
   it("does not lose updates when two movements run concurrently", async () => {
     const store = new MemoryStockStore([
-      { id: itemId, quantity: 50, reorderLevel: 15, alertActive: false, updatedAt: "2026-09-05T05:00:00.000Z" },
+      {
+        id: itemId,
+        name: "Cotton Fabric",
+        unit: "metres",
+        quantity: 50,
+        reorderLevel: 15,
+        managerPhone: "+254712345678",
+        alertActive: false,
+        updatedAt: "2026-09-05T05:00:00.000Z",
+      },
     ]);
 
     const results = await Promise.allSettled([
@@ -62,7 +98,16 @@ describe("recordStockMovement", () => {
 
   it("keeps movement history newest first and updates the item timestamp", async () => {
     const store = new MemoryStockStore([
-      { id: itemId, quantity: 50, reorderLevel: 15, alertActive: false, updatedAt: "2026-01-01T00:00:00.000Z" },
+      {
+        id: itemId,
+        name: "Cotton Fabric",
+        unit: "metres",
+        quantity: 50,
+        reorderLevel: 15,
+        managerPhone: "+254712345678",
+        alertActive: false,
+        updatedAt: "2026-01-01T00:00:00.000Z",
+      },
     ]);
 
     await store.apply({ inventoryItemId: itemId, type: "STOCK_OUT", quantity: 5 });

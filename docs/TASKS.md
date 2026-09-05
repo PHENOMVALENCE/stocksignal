@@ -23,7 +23,8 @@
 
 - [x] Pure threshold and alert-state rules
 - [ ] SMS provider connected to configured credentials
-- [ ] Low-stock notification persistence and failure handling
+- [x] Low-stock notification persistence
+- [ ] SMS failure handling
 
 ## Restocking
 

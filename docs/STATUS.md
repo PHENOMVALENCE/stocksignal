@@ -2,7 +2,7 @@
 
 ## Current phase
 
-P0 MVP — F01–F03 complete
+P0 MVP — F01–F04 complete
 
 ## Implemented
 
@@ -17,6 +17,7 @@ P0 MVP — F01–F03 complete
 - Timestamped Supabase CLI migration, typed Database definitions, and server-only repositories
 - Inventory list, empty/error states, and validated material creation
 - Transactional stock-in, stock-out, and adjustment RPC with movement history
+- Persistent low-stock transitions with one pending manager notification per crossing
 
 ## Verified
 
@@ -28,8 +29,7 @@ instance including the `updated_at` triggers and movement constraints.
 ## Next
 
 1. Configure a Supabase project and apply `supabase/migrations`.
-2. Persist threshold state and pending low-stock notifications (F04).
-3. Connect Africa's Talking SMS.
+2. Connect Africa's Talking SMS (F05).
 4. Implement supplier restock requests and notification history.
 5. Add optional USSD flows.
 

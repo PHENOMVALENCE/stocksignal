@@ -1,11 +1,24 @@
-import { calculateNewStock, isLowStock, type StockMovementType } from "./stock-rules";
+import { buildLowStockMessage } from "./messages";
+import { calculateNewStock, isLowStock, shouldSendLowStockAlert, type StockMovementType } from "./stock-rules";
 
 export interface MemoryInventoryItem {
   id: string;
+  name: string;
+  unit: string;
   quantity: number;
   reorderLevel: number;
+  managerPhone: string | null;
   alertActive: boolean;
   updatedAt: string;
+}
+
+export interface MemoryNotification {
+  id: string;
+  inventoryItemId: string;
+  type: "LOW_STOCK" | "RESTOCK_REQUEST";
+  status: "PENDING" | "SENT" | "FAILED";
+  recipient: string;
+  message: string;
 }
 
 export interface MemoryMovement {
@@ -22,6 +35,7 @@ export class MemoryStockStore {
   private readonly locks = new Map<string, Promise<void>>();
   readonly items = new Map<string, MemoryInventoryItem>();
   readonly movements: MemoryMovement[] = [];
+  readonly notifications: MemoryNotification[] = [];
 
   constructor(items: MemoryInventoryItem[]) {
     for (const item of items) {
@@ -44,6 +58,7 @@ export class MemoryStockStore {
         type: input.type,
       });
 
+      const shouldAlert = shouldSendLowStockAlert(newQuantity, item.reorderLevel, item.alertActive);
       item.quantity = newQuantity;
       item.alertActive = isLowStock(newQuantity, item.reorderLevel);
       item.updatedAt = new Date().toISOString();
@@ -60,12 +75,32 @@ export class MemoryStockStore {
 
       this.movements.unshift(movement);
 
+      let notificationId: string | null = null;
+
+      if (shouldAlert && item.managerPhone) {
+        const notification: MemoryNotification = {
+          id: crypto.randomUUID(),
+          inventoryItemId: item.id,
+          type: "LOW_STOCK",
+          status: "PENDING",
+          recipient: item.managerPhone,
+          message: buildLowStockMessage({
+            name: item.name,
+            quantity: newQuantity,
+            reorderLevel: item.reorderLevel,
+            unit: item.unit,
+          }),
+        };
+        this.notifications.push(notification);
+        notificationId = notification.id;
+      }
+
       return {
         movementId: movement.id,
         previousQuantity,
         newQuantity,
         alertActive: item.alertActive,
-        notificationId: null as string | null,
+        notificationId,
       };
     });
   }
