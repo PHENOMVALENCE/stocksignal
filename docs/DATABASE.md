@@ -35,6 +35,6 @@ All public tables have RLS enabled with no permissive policies. This denies brow
 
 ## Transactional movement plan
 
-Production movement writes should use a database transaction/RPC to lock the inventory row, validate the operation, update the balance and alert state, and insert the movement. SMS is attempted after that transaction and recorded separately so provider failures do not corrupt stock history.
+`public.apply_stock_movement` locks the inventory row with `FOR UPDATE`, validates the operation, updates quantity and `alert_active`, and inserts the movement in one transaction. SMS is attempted after that transaction and recorded separately so provider failures do not corrupt stock history.
 
 Before applying the schema, review it in the Supabase SQL editor or convert it into a timestamped CLI migration, then run Supabase database advisors.

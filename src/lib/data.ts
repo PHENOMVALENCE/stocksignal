@@ -1,7 +1,8 @@
 import { hasSupabaseServerEnv } from "@/lib/env";
 import { toUserMessage } from "@/lib/errors";
 import { inventoryItemRepository } from "@/repositories/inventory-items";
-import type { InventoryItem } from "@/repositories/mappers";
+import type { InventoryItem, StockMovement } from "@/repositories/mappers";
+import { stockMovementRepository } from "@/repositories/stock-movements";
 
 export type DataResult<T> =
   | { ok: true; data: T }
@@ -17,6 +18,29 @@ export async function loadInventoryItem(id: string): Promise<DataResult<Inventor
 
   try {
     return { ok: true, data: await inventoryItemRepository().getById(id) };
+  } catch (error) {
+    return {
+      ok: false,
+      reason: "error",
+      message: toUserMessage(error, "The inventory item could not be loaded."),
+    };
+  }
+}
+
+export async function loadInventoryItemDetail(id: string): Promise<DataResult<{ item: InventoryItem; movements: StockMovement[] } | null>> {
+  if (!hasSupabaseServerEnv()) {
+    return { ok: false, reason: "configuration", message: configurationMessage };
+  }
+
+  try {
+    const item = await inventoryItemRepository().getById(id);
+
+    if (!item) {
+      return { ok: true, data: null };
+    }
+
+    const movements = await stockMovementRepository().listByItem(id);
+    return { ok: true, data: { item, movements } };
   } catch (error) {
     return {
       ok: false,

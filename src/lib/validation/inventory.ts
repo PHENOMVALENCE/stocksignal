@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { internationalPhoneSchema, optionalInternationalPhoneSchema } from "./phone";
-import { nonNegativeQuantitySchema } from "./quantity";
+import { nonNegativeQuantitySchema, positiveQuantitySchema } from "./quantity";
 
 const optionalText = z
   .string()
@@ -41,3 +41,42 @@ export const createInventoryItemSchema = z
 export type CreateInventoryItemValues = z.infer<typeof createInventoryItemSchema>;
 
 export const inventoryItemIdSchema = z.uuid("Choose a valid inventory item.");
+
+export const stockMovementSchema = z
+  .object({
+    inventoryItemId: inventoryItemIdSchema,
+    type: z.enum(["STOCK_IN", "STOCK_OUT", "ADJUSTMENT"], {
+      error: "Choose stock in, stock out, or adjustment.",
+    }),
+    quantity: z.string(),
+    notes: z
+      .string()
+      .trim()
+      .max(280, "Notes must be 280 characters or fewer.")
+      .optional()
+      .transform((value) => (value ? value : undefined)),
+  })
+  .transform((value, context) => {
+    const parsedQuantity =
+      value.type === "ADJUSTMENT"
+        ? nonNegativeQuantitySchema("Adjustment quantity").safeParse(value.quantity)
+        : positiveQuantitySchema("Movement quantity").safeParse(value.quantity);
+
+    if (!parsedQuantity.success) {
+      context.addIssue({
+        code: "custom",
+        path: ["quantity"],
+        message: parsedQuantity.error.issues[0]?.message ?? "Enter a valid quantity.",
+      });
+      return z.NEVER;
+    }
+
+    return {
+      inventoryItemId: value.inventoryItemId,
+      type: value.type,
+      quantity: parsedQuantity.data,
+      notes: value.notes,
+    };
+  });
+
+export type StockMovementValues = z.infer<typeof stockMovementSchema>;

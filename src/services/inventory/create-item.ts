@@ -12,7 +12,7 @@ export interface CreateInventoryItemResult {
 
 export async function createInventoryItem(
   input: unknown,
-  repository = inventoryItemRepository(),
+  repository?: { create: ReturnType<typeof inventoryItemRepository>["create"] },
 ): Promise<CreateInventoryItemResult> {
   const parsed = createInventoryItemSchema.safeParse(input);
 
@@ -24,7 +24,7 @@ export async function createInventoryItem(
   }
 
   try {
-    const item = await repository.create({
+    const item = await (repository ?? inventoryItemRepository()).create({
       name: parsed.data.name,
       sku: parsed.data.sku,
       unit: parsed.data.unit,

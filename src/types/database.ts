@@ -217,7 +217,23 @@ export interface Database {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      apply_stock_movement: {
+        Args: {
+          p_inventory_item_id: string;
+          p_type: StockMovementType;
+          p_quantity: number | string;
+          p_notes?: string | null;
+        };
+        Returns: {
+          movement_id: string;
+          previous_quantity: string;
+          new_quantity: string;
+          alert_active: boolean;
+          notification_id: string | null;
+        }[];
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };

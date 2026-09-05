@@ -27,6 +27,11 @@ describe("F01 schema migration", () => {
     expect(migration).toContain("create table if not exists public.notifications");
     expect(migration).toContain("create table if not exists public.restock_requests");
 
+    const movement = files.find((file) => file.includes("apply_stock_movement"));
+    if (movement) {
+      expect(readMigration(movement)).toContain("for update");
+    }
+
     for (const table of ["inventory_items", "stock_movements", "notifications", "restock_requests"]) {
       expect(reviewed).toContain(`alter table public.${table} enable row level security`);
       expect(migration).toContain(`alter table public.${table} enable row level security`);

@@ -16,8 +16,8 @@
 - [ ] Database migration applied to a configured project
 - [x] List and create items
 - [ ] Update items
-- [ ] Stock in, stock out, and adjustments
-- [ ] Movement history
+- [x] Stock in, stock out, and adjustments
+- [x] Movement history
 
 ## Signals
 

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MovementForm } from "@/components/inventory/movement-form";
+import { MovementHistory } from "@/components/inventory/movement-history";
 import { AppShell } from "@/components/layout/app-shell";
 import { ErrorState } from "@/components/ui/error-state";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { loadInventoryItem } from "@/lib/data";
+import { loadInventoryItemDetail } from "@/lib/data";
 import { formatQuantity } from "@/lib/quantity";
 import { inventoryItemIdSchema } from "@/lib/validation/inventory";
 
@@ -22,7 +24,7 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
     notFound();
   }
 
-  const result = await loadInventoryItem(parsedId.data);
+  const result = await loadInventoryItemDetail(parsedId.data);
 
   if (!result.ok) {
     return (
@@ -39,7 +41,7 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
     notFound();
   }
 
-  const item = result.data;
+  const { item, movements } = result.data;
 
   return (
     <AppShell
@@ -72,6 +74,13 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
           </dd>
         </div>
       </dl>
+      <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
+        <MovementForm inventoryItemId={item.id} unit={item.unit} />
+        <section>
+          <h2 className="mb-4 text-xl font-semibold tracking-[-0.02em]">Movement history</h2>
+          <MovementHistory movements={movements} unit={item.unit} />
+        </section>
+      </div>
     </AppShell>
   );
 }
