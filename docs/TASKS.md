@@ -12,6 +12,7 @@
 
 ## Inventory
 
+- [x] CLI migration, typed definitions, and server-only repositories
 - [ ] Database migration applied to a configured project
 - [ ] List, create, and update items
 - [ ] Stock in, stock out, and adjustments

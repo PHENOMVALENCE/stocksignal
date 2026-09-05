@@ -2,6 +2,14 @@ import "server-only";
 
 import { z } from "zod";
 
+const optionalNonEmpty = z
+  .string()
+  .optional()
+  .transform((value) => {
+    const trimmed = value?.trim();
+    return trimmed ? trimmed : undefined;
+  });
+
 const supabaseServerSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
@@ -10,7 +18,7 @@ const supabaseServerSchema = z.object({
 const africasTalkingSchema = z.object({
   AT_USERNAME: z.string().min(1),
   AT_API_KEY: z.string().min(1),
-  AT_SENDER_ID: z.string().min(1).optional(),
+  AT_SENDER_ID: optionalNonEmpty,
 });
 
 export type SupabaseServerEnv = z.infer<typeof supabaseServerSchema>;
@@ -29,6 +37,10 @@ export function getSupabaseServerEnv(): SupabaseServerEnv {
   }
 
   return result.data;
+}
+
+export function hasSupabaseServerEnv(): boolean {
+  return supabaseServerSchema.safeParse(process.env).success;
 }
 
 export function getAfricasTalkingEnv(): AfricasTalkingEnv {

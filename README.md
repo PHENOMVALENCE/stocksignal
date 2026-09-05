@@ -62,7 +62,10 @@ src/components/                  focused UI components
 src/lib/                         environment and database primitives
 src/services/inventory/          stock domain rules
 src/services/africas-talking/    server-only SMS adapter
+supabase/migrations/             timestamped CLI migrations
 supabase/schema.sql              reviewable MVP database schema
+src/repositories/                server-only typed data access
+src/types/database.ts            generated-style Database types
 docs/                            product and engineering documentation
 .github/                         CI and contribution templates
 ```

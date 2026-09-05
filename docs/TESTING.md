@@ -8,6 +8,8 @@ Test pure stock calculations, threshold comparisons, and duplicate-alert state t
 
 Test route handlers, database adapters, and Africa's Talking wrappers with mocks or stubs. Verify validation, persistence ordering, and normalized failure records without sending live SMS.
 
+Repository tests inject a fake Supabase client and must not read `.env.local` or live service-role keys. Schema tests assert that the CLI migration enables RLS and introduces no permissive policies. Live PostgreSQL is used only in CI against a throwaway database.
+
 ## End-to-end
 
 Add focused browser coverage later for material creation, stock consumption, low-stock state, and supplier restock requests. Keep the suite centered on critical demonstration flows.

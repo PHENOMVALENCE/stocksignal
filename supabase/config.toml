@@ -1,0 +1,10 @@
+# Minimal Supabase CLI config for local/remote migrations.
+# Link a project with `npx supabase link` before applying remotely.
+
+project_id = "stocksignal"
+
+[api]
+enabled = true
+
+[db]
+major_version = 16

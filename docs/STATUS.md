@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Engineering Foundation
+P0 MVP — F01 complete
 
 ## Implemented
 
@@ -14,6 +14,7 @@ Engineering Foundation
 - Production Docker configuration and GitHub validation workflows
 - Schema verified to apply cleanly and idempotently against PostgreSQL 16
 - Zero known dependency vulnerabilities
+- Timestamped Supabase CLI migration, typed Database definitions, and server-only repositories
 
 ## Verified
 
@@ -24,8 +25,8 @@ instance including the `updated_at` triggers and movement constraints.
 
 ## Next
 
-1. Configure a Supabase project and apply the verified schema.
-2. Implement inventory CRUD.
+1. Configure a Supabase project and apply `supabase/migrations`.
+2. Implement inventory list and material creation (F02).
 3. Implement transactional stock movements.
 4. Persist threshold state and notification attempts.
 5. Connect Africa's Talking SMS.

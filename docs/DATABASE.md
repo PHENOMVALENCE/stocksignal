@@ -1,6 +1,26 @@
 # Database Design
 
-The planned Supabase/PostgreSQL schema is defined in `supabase/schema.sql`. It is intentionally not applied to a remote project by this foundation.
+The reviewed Supabase/PostgreSQL schema lives in `supabase/schema.sql` and is applied as a timestamped CLI migration in `supabase/migrations/`. Privileged application access uses typed server-only repositories; browser clients receive no service-role key and no permissive RLS policies.
+
+## Apply locally or remotely
+
+```bash
+# Local Supabase (Docker)
+npx supabase start
+npx supabase db reset
+
+# Linked remote project
+npx supabase link --project-ref <project-ref>
+npx supabase db push
+```
+
+Regenerate types after a schema change:
+
+```bash
+npx supabase gen types typescript --local > src/types/database.ts
+```
+
+The committed `src/types/database.ts` file matches the MVP schema so builds do not require a live project.
 
 ## Tables
 
