@@ -25,15 +25,14 @@ PR #3 is stacked on PR #2. Review and merge #2 first, then update/merge #3. Futu
 
 1. **Authorship metadata needs correction in future work.** The seven original feature commits have good, outcome-based subjects, but each contains a `Co-authored-by: Cursor` trailer. This conflicts with StockSignal's rule that commits be authored only by Valence. Public history has not been rewritten; all new commits use only `Valence Mwigani <phenomenalvalence@gmail.com>`, and `docs/AGENT_WORKFLOW.md` adds a mandatory verification command.
 2. **“Inventory CRUD” is broader than the implemented UI.** List and create are implemented, along with movement operations; editing material metadata and deleting/archiving an item are not implemented. Documentation and PR descriptions should use precise wording until update/archive behavior exists.
-3. **Restock creation is not one database transaction.** The notification is inserted before the restock request. A failure between writes could leave an unlinked notification. Move both inserts into one RPC or compensate explicitly before treating this workflow as production-safe.
+3. **Restock creation is one database transaction.** `public.create_restock_request` inserts the pending notification and restock request together. Application-level two-minute idempotency remains a separate follow-up.
 4. **Restock idempotency is application-level.** The two-minute duplicate check is read-then-write and can race under concurrent submissions. Add a database idempotency key or uniqueness strategy for robust duplicate prevention.
 5. **Authentication remains intentionally absent.** RLS is enabled with no browser policies; server-only service-role repositories currently perform data access. Do not expose inventory through a browser client until organization ownership and tested RLS policies are implemented.
 6. **Live external integrations remain unverified.** Local database behavior is verified, but a hosted Supabase project and Africa's Talking sandbox credentials are still required for the real hackathon flow.
 
 ## Recommended next small features
 
-1. `fix: create restock request and notification atomically`
-2. `test: enforce restock request idempotency under concurrency`
+1. `test: enforce restock request idempotency under concurrency`
 3. `feat: edit inventory material details`
 4. `feat: add demo seed data`
 5. `feat: authenticate managers with organization-scoped RLS`

@@ -31,6 +31,7 @@
 - [x] Supplier information UI
 - [x] Requested quantity and supplier SMS
 - [x] Request status/history
+- [x] Atomic restock request and notification write
 
 ## Optional USSD
 

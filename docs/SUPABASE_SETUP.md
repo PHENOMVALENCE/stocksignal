@@ -36,7 +36,7 @@ npm run db:types
 
 `db:types` regenerates `src/types/database.generated.ts`. Keep application-specific aliases in `src/types/database.ts`; never hand-edit the generated file.
 
-Open the Studio URL printed by `npx supabase status` (normally `http://localhost:54323`). Confirm the four tables—`inventory_items`, `stock_movements`, `notifications`, and `restock_requests`—and the `apply_stock_movement` RPC exist.
+Open the Studio URL printed by `npx supabase status` (normally `http://localhost:54323`). Confirm the four tables—`inventory_items`, `stock_movements`, `notifications`, and `restock_requests`—and the `apply_stock_movement` and `create_restock_request` RPCs exist.
 
 Verify them from the command line:
 

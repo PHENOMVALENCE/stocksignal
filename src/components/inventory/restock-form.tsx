@@ -19,6 +19,7 @@ export function RestockForm({ inventoryItemId, unit, supplierName, supplierPhone
   return (
     <form action={action} className="space-y-5 border border-[var(--line)] bg-white p-6" noValidate>
       <input name="inventoryItemId" type="hidden" value={inventoryItemId} />
+      <input name="unit" type="hidden" value={unit} />
       <h2 className="text-xl font-semibold tracking-[-0.02em]">Request restock</h2>
       <p className="text-sm leading-6 text-[var(--muted)]">
         Send the supplier a replenishment request. The quantity is recorded in {unit}.

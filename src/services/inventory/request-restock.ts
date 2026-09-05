@@ -5,6 +5,7 @@ import { inventoryItemRepository } from "@/repositories/inventory-items";
 import type { NotificationRecord, RestockRequest } from "@/repositories/mappers";
 import { notificationRepository } from "@/repositories/notifications";
 import { restockRequestRepository } from "@/repositories/restock-requests";
+import { restockRpc } from "@/repositories/restock-rpc";
 import { buildRestockRequestMessage } from "@/services/inventory/messages";
 import { isLowStock } from "@/services/inventory/stock-rules";
 import { deliverNotification } from "@/services/notifications/deliver";
@@ -29,6 +30,7 @@ export async function requestRestock(
     items?: ReturnType<typeof inventoryItemRepository>;
     requests?: ReturnType<typeof restockRequestRepository>;
     notifications?: ReturnType<typeof notificationRepository>;
+    rpc?: ReturnType<typeof restockRpc>;
     deliver?: typeof deliverNotification;
   } = {},
 ): Promise<RequestRestockResult> {
@@ -49,9 +51,15 @@ export async function requestRestock(
       return { message: "Restock requests are available only while the material is low stock." };
     }
 
+    if (parsed.data.unit !== item.unit) {
+      return {
+        fieldErrors: { unit: "The requested unit does not match the material unit." },
+        message: "The requested unit does not match the material unit.",
+      };
+    }
+
     const requests = deps.requests ?? restockRequestRepository();
     const notifications = deps.notifications ?? notificationRepository();
-    const deliver = deps.deliver ?? deliverNotification;
     const existing = await requests.listByItem(item.id);
     const recent = existing.find((request) => {
       const age = Date.now() - Date.parse(request.createdAt);
@@ -81,23 +89,19 @@ export async function requestRestock(
       unit: item.unit,
     });
 
-    const notification = await notifications.create({
-      inventoryItemId: item.id,
-      type: "RESTOCK_REQUEST",
-      recipient: parsed.data.supplierPhone,
-      message,
-      status: "PENDING",
-    });
-
-    const request = await requests.create({
+    const rpc = deps.rpc ?? restockRpc();
+    const deliver = deps.deliver ?? deliverNotification;
+    const created = await rpc.createRequest({
       inventoryItemId: item.id,
       requestedQuantity: parsed.data.requestedQuantity,
       supplierName: parsed.data.supplierName,
       supplierPhone: parsed.data.supplierPhone,
-      notificationId: notification.id,
+      message,
+      unit: parsed.data.unit,
     });
 
-    const delivery = await deliver(notification.id, { notifications });
+    const request = await requests.requireById(created.restockRequestId);
+    const delivery = await deliver(created.notificationId, { notifications });
 
     return {
       request,

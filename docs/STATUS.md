@@ -20,6 +20,7 @@ P0 MVP — F01–F07 complete
 - Persistent low-stock transitions with one pending manager notification per crossing
 - Africa's Talking SMS delivery after commit, with sanitized SENT/FAILED audit and bounded retry
 - Supplier restock requests from low-stock items, linked to notification history
+- Atomic `create_restock_request` RPC so a restock row and its notification are written together
 - Operations dashboard and filterable notification history from persisted data
 
 ## Verified
