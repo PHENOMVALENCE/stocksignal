@@ -1,7 +1,8 @@
 import { hasSupabaseServerEnv } from "@/lib/env";
 import { toUserMessage } from "@/lib/errors";
 import { inventoryItemRepository } from "@/repositories/inventory-items";
-import type { InventoryItem, StockMovement } from "@/repositories/mappers";
+import type { InventoryItem, RestockRequest, StockMovement } from "@/repositories/mappers";
+import { restockRequestRepository } from "@/repositories/restock-requests";
 import { stockMovementRepository } from "@/repositories/stock-movements";
 
 export type DataResult<T> =
@@ -27,7 +28,9 @@ export async function loadInventoryItem(id: string): Promise<DataResult<Inventor
   }
 }
 
-export async function loadInventoryItemDetail(id: string): Promise<DataResult<{ item: InventoryItem; movements: StockMovement[] } | null>> {
+export async function loadInventoryItemDetail(
+  id: string,
+): Promise<DataResult<{ item: InventoryItem; movements: StockMovement[]; restockRequests: RestockRequest[] } | null>> {
   if (!hasSupabaseServerEnv()) {
     return { ok: false, reason: "configuration", message: configurationMessage };
   }
@@ -39,8 +42,11 @@ export async function loadInventoryItemDetail(id: string): Promise<DataResult<{ 
       return { ok: true, data: null };
     }
 
-    const movements = await stockMovementRepository().listByItem(id);
-    return { ok: true, data: { item, movements } };
+    const [movements, restockRequests] = await Promise.all([
+      stockMovementRepository().listByItem(id),
+      restockRequestRepository().listByItem(id),
+    ]);
+    return { ok: true, data: { item, movements, restockRequests } };
   } catch (error) {
     return {
       ok: false,

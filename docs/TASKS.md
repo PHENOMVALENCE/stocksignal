@@ -28,9 +28,9 @@
 
 ## Restocking
 
-- [ ] Supplier information UI
-- [ ] Requested quantity and supplier SMS
-- [ ] Request status/history
+- [x] Supplier information UI
+- [x] Requested quantity and supplier SMS
+- [x] Request status/history
 
 ## Optional USSD
 

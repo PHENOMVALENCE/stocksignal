@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 
 import { MovementForm } from "@/components/inventory/movement-form";
 import { MovementHistory } from "@/components/inventory/movement-history";
+import { RestockForm } from "@/components/inventory/restock-form";
 import { AppShell } from "@/components/layout/app-shell";
 import { ErrorState } from "@/components/ui/error-state";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { loadInventoryItemDetail } from "@/lib/data";
 import { formatQuantity } from "@/lib/quantity";
 import { inventoryItemIdSchema } from "@/lib/validation/inventory";
+import { isLowStock } from "@/services/inventory/stock-rules";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +43,8 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
     notFound();
   }
 
-  const { item, movements } = result.data;
+  const { item, movements, restockRequests } = result.data;
+  const low = isLowStock(item.quantity, item.reorderLevel);
 
   return (
     <AppShell
@@ -75,11 +78,43 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
         </div>
       </dl>
       <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
-        <MovementForm inventoryItemId={item.id} unit={item.unit} />
-        <section>
-          <h2 className="mb-4 text-xl font-semibold tracking-[-0.02em]">Movement history</h2>
-          <MovementHistory movements={movements} unit={item.unit} />
-        </section>
+        <div className="space-y-8">
+          <MovementForm inventoryItemId={item.id} unit={item.unit} />
+          {low ? (
+            <RestockForm
+              inventoryItemId={item.id}
+              supplierName={item.supplierName ?? ""}
+              supplierPhone={item.supplierPhone ?? ""}
+              unit={item.unit}
+            />
+          ) : null}
+        </div>
+        <div className="space-y-8">
+          <section>
+            <h2 className="mb-4 text-xl font-semibold tracking-[-0.02em]">Movement history</h2>
+            <MovementHistory movements={movements} unit={item.unit} />
+          </section>
+          <section>
+            <h2 className="mb-4 text-xl font-semibold tracking-[-0.02em]">Restock requests</h2>
+            {restockRequests.length === 0 ? (
+              <p className="text-[var(--muted)]">No supplier restock requests have been recorded for this material.</p>
+            ) : (
+              <ul className="space-y-3">
+                {restockRequests.map((request) => (
+                  <li className="border border-[var(--line)] bg-white px-4 py-3" key={request.id}>
+                    <p className="font-semibold">
+                      {formatQuantity(request.requestedQuantity)} {item.unit} · {request.supplierName}
+                    </p>
+                    <p className="mt-1 text-sm text-[var(--muted)]">
+                      {request.status} · {new Date(request.createdAt).toLocaleString()}
+                      {request.notificationId ? " · notification recorded" : ""}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
       </div>
     </AppShell>
   );
