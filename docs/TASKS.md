@@ -1,5 +1,27 @@
 # Task Checklist
 
+## MFGFlow order-to-production
+
+- [x] Product specification, domain model, implementation phases, and agent prompt
+- [ ] MF-00 MFGFlow product shell
+- [ ] MF-01 organizations, authentication, and RLS
+- [ ] MF-02 customers
+- [ ] MF-03 products
+- [ ] MF-04 versioned bills of materials
+- [ ] MF-05 draft customer orders
+- [ ] MF-06 material requirement and shortage calculation
+- [ ] MF-07 confirmed-order requirement snapshot
+- [ ] MF-08 production jobs
+- [ ] MF-09 production stage transitions
+- [ ] MF-10 linked material consumption
+- [ ] MF-11 quality checklist templates
+- [ ] MF-12 quality inspections
+- [ ] MF-13 production completion and delivery readiness
+- [ ] MF-14 rule-based recommendations
+- [ ] MF-15 optional AI operational summary
+- [ ] MF-16 order-to-production dashboard
+- [ ] MF-17 deterministic demo data and script
+
 ## Foundation
 
 - [x] Next.js, TypeScript, Tailwind CSS, and ESLint configured
@@ -13,7 +35,7 @@
 ## Inventory
 
 - [x] CLI migration, typed definitions, and server-only repositories
-- [ ] Database migration applied to a configured project
+- [x] Database migrations applied to the configured hosted project
 - [x] List and create items
 - [ ] Update items
 - [x] Stock in, stock out, and adjustments

@@ -1,8 +1,8 @@
-# StockSignal
+# MFGFlow
 
-**Inventory intelligence for manufacturers.**
+**Order-to-production clarity for African manufacturers.**
 
-StockSignal is a lightweight manufacturing inventory and communication platform designed primarily for small and medium manufacturers in Africa. It tracks critical raw materials, identifies reorder conditions, and uses Africa's Talking channels to help teams act before shortages stop production.
+MFGFlow is evolving StockSignal into a lightweight order-to-production platform for small and medium manufacturers in Africa. StockSignal remains the working inventory module: it tracks critical raw materials, identifies reorder conditions, and uses Africa's Talking channels to help teams act before shortages stop production. The documented next phases connect customer orders, bills of materials, production progress, quality checks, and explainable recommendations.
 
 ## Problem
 
@@ -27,9 +27,10 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 
 **Planned — next**
 
-- Authentication and organization-scoped RLS
-- USSD inventory workflow
-- Demo seed data on a linked Supabase project
+- MFGFlow product shell and organization-scoped authentication
+- Customers, products, bills of materials, and customer orders
+- Order material planning and shortage recommendations
+- Production tracking, quality checks, and delivery readiness
 
 **Future**
 
@@ -117,6 +118,8 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 ## Documentation
 
 - [Product specification](docs/PROJECT_SPEC.md)
+- [MFGFlow product specification](docs/MFGFLOW_PRODUCT_SPEC.md), [domain model](docs/MFGFLOW_DOMAIN_MODEL.md), and [implementation plan](docs/MFGFLOW_IMPLEMENTATION_PLAN.md)
+- [Cursor start prompt for MFGFlow](docs/MFGFLOW_CURSOR_PROMPT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Roadmap](docs/ROADMAP.md) and [task checklist](docs/TASKS.md)
 - [Build-ready feature backlog](docs/FEATURE_BACKLOG.md) and [Cursor implementation prompt](docs/CURSOR_IMPLEMENTATION_PROMPT.md)
@@ -129,4 +132,4 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 
 ## Hackathon focus
 
-The primary MVP proves two outcomes: one reliable low-stock SMS per threshold event, and a supplier restock request initiated from a low-stock item. SMS comes first; USSD is the next high-value enhancement.
+The existing StockSignal MVP proves reliable inventory and replenishment signals. The MFGFlow hackathon journey builds on it: record an order, calculate material needs, expose a shortage, track production, pass quality control, and mark the order ready for delivery.

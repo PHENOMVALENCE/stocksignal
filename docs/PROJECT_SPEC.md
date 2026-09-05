@@ -1,4 +1,6 @@
-# StockSignal Product Specification
+# StockSignal Inventory Module Specification
+
+This document describes the implemented inventory module. For the current overall product direction, read `MFGFLOW_PRODUCT_SPEC.md`; StockSignal remains a module within MFGFlow.
 
 ## Purpose
 
@@ -50,6 +52,6 @@ Please contact the manufacturer regarding availability.
 - Keep privileged database and provider credentials server-side.
 - Label any sample values as demo data; do not present fake operational statistics.
 
-## Out of scope for foundation
+## Out of scope for the StockSignal foundation
 
-The foundation does not implement live inventory CRUD, authentication, production SMS delivery, USSD, payments, multi-tenancy, analytics, or procurement workflows. See the roadmap for priorities.
+Customer orders, bills of materials, production tracking, quality control, and AI recommendations are intentionally specified separately in the MFGFlow documents. Authentication, USSD, payments, multi-tenancy, and advanced analytics remain separately phased work. See the roadmap for priorities.

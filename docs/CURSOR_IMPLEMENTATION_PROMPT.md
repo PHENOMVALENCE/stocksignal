@@ -1,5 +1,7 @@
 # Cursor Implementation Prompt
 
+> Archived foundation prompt: F01–F07 are already implemented. For new work, use `MFGFLOW_CURSOR_PROMPT.md`.
+
 Copy the prompt below into Cursor while the repository is checked out on a new feature branch based on the reviewed foundation.
 
 ---

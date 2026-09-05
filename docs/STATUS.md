@@ -2,7 +2,7 @@
 
 ## Current phase
 
-P0 MVP — F01–F07 complete
+StockSignal P0 inventory MVP complete; MFGFlow implementation documented and ready to begin
 
 ## Implemented
 
@@ -32,10 +32,11 @@ instance including the `updated_at` triggers and movement constraints.
 
 ## Next
 
-1. Configure a Supabase project and apply `supabase/migrations`.
-2. Add Africa's Talking credentials for live demo SMS.
-3. Add optional authentication (F08) and USSD (F09).
+1. Implement MF-00, the MFGFlow product shell.
+2. Implement MF-01, authentication and organization-scoped RLS.
+3. Continue one numbered vertical slice at a time through the hackathon journey.
+4. Add Africa's Talking credentials for live demo SMS.
 
 ## Blockers
 
-- Live persistence and SMS delivery require user-provided Supabase and Africa's Talking project configuration.
+- Live SMS delivery requires user-provided Africa's Talking project configuration.

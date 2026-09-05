@@ -35,3 +35,10 @@ advisories. The tradeoff is that the SDK runs against dependency versions its
 authors did not pin, so SDK initialization is smoke-tested and the overrides
 are revisited on every SDK upgrade.
 
+## ADR-008: Evolve StockSignal into MFGFlow without replacing it
+
+StockSignal remains the inventory and replenishment module inside MFGFlow. The existing tables, services, deployment, and brand references used by integrations are not renamed during product expansion. New order, planning, production, quality, and recommendation modules integrate with the proven inventory boundary. This limits migration risk and preserves a coherent story: MFGFlow coordinates the journey while StockSignal protects material availability.
+
+## ADR-009: Use deterministic planning before generative AI
+
+Material arithmetic, shortages, legal state transitions, quality gates, and urgency rules are deterministic domain logic backed by PostgreSQL records. AI may summarize those verified facts and recommend actions, but it is not a source of quantities or operational state and receives no mutation tools in the hackathon MVP. This keeps the demonstration explainable and useful when an AI provider is unavailable.
