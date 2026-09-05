@@ -37,8 +37,8 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
 
   return (
     <AppShell
-      description="Every SMS attempt is recorded with type, recipient, and delivery status."
-      eyebrow="Communications"
+      description="StockSignal records every SMS attempt with type, recipient, and delivery status."
+      eyebrow="StockSignal"
       title="Notifications"
     >
       <form className="mb-8 grid gap-4 border border-[var(--line)] bg-white p-5 sm:grid-cols-4" method="get">

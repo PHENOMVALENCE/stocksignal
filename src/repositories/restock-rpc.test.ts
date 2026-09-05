@@ -26,7 +26,7 @@ describe("createRestockRpc", () => {
         requestedQuantity: 50,
         supplierName: "Demo Mill",
         supplierPhone: "+254700000002",
-        message: "STOCKSIGNAL RESTOCK REQUEST",
+        message: "JENGAFLOW RESTOCK REQUEST",
         unit: "metres",
       }),
     ).resolves.toEqual({
@@ -52,7 +52,7 @@ describe("createRestockRpc", () => {
         requestedQuantity: 50,
         supplierName: "Demo Mill",
         supplierPhone: "+254700000002",
-        message: "STOCKSIGNAL RESTOCK REQUEST",
+        message: "JENGAFLOW RESTOCK REQUEST",
         unit: "metres",
       }),
     ).rejects.toMatchObject({

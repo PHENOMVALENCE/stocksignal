@@ -19,7 +19,7 @@ Status: LOW STOCK
 Expected manager SMS:
 
 ```text
-STOCKSIGNAL ALERT
+JENGAFLOW ALERT
 
 Cotton Fabric is running low.
 

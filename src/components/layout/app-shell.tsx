@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-const navigation = [
-  { href: "/", label: "Dashboard" },
-  { href: "/inventory", label: "Inventory" },
-  { href: "/notifications", label: "Notifications" },
-];
+import { INVENTORY_MODULE_NAME, PRODUCT_NAME, primaryNavigation } from "@/lib/product";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -20,18 +16,18 @@ export function AppShell({ children, eyebrow, title, description, actions }: App
       <header className="border-b border-[var(--line)] bg-[var(--surface)]">
         <div className="mx-auto flex min-h-18 max-w-7xl items-center justify-between gap-8 px-6 lg:px-10">
           <Link className="flex items-center gap-3 font-semibold tracking-[-0.02em]" href="/">
-            <span className="grid h-8 w-8 place-items-center bg-[var(--ink)] text-sm text-white">S</span>
-            StockSignal
+            <span className="grid h-8 w-8 place-items-center bg-[var(--ink)] text-sm text-white">J</span>
+            {PRODUCT_NAME}
           </Link>
           <nav aria-label="Primary navigation" className="hidden items-center gap-7 text-sm sm:flex">
-            {navigation.map((item) => (
+            {primaryNavigation.map((item) => (
               <Link className="text-[var(--muted)] transition-colors hover:text-[var(--ink)]" href={item.href} key={item.href}>
                 {item.label}
               </Link>
             ))}
           </nav>
           <span className="border border-[var(--line)] bg-white px-3 py-1.5 text-xs font-medium text-[var(--muted)]">
-            Operations
+            {INVENTORY_MODULE_NAME}
           </span>
         </div>
       </header>

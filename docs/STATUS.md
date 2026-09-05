@@ -2,7 +2,7 @@
 
 ## Current phase
 
-StockSignal P0 inventory MVP complete; MFGFlow implementation documented and ready to begin
+StockSignal P0 inventory MVP complete; JengaFlow product shell presented; authentication is next
 
 ## Implemented
 
@@ -10,6 +10,7 @@ StockSignal P0 inventory MVP complete; MFGFlow implementation documented and rea
 - Product, architecture, security, environment, database, development, and demo documentation
 - Environment validation primitives
 - Pure, tested stock threshold logic
+- JengaFlow product metadata, navigation, and application shell, with StockSignal labeled as the inventory module
 - Professional application shell and `/api/health`
 - Production Docker configuration and GitHub validation workflows
 - Schema verified to apply cleanly and idempotently against PostgreSQL 16
@@ -25,17 +26,17 @@ StockSignal P0 inventory MVP complete; MFGFlow implementation documented and rea
 
 ## Verified
 
-The foundation gate is run against a clean install: lint, typecheck, 17 unit
-tests, production build, secret scan, Docker image build, a container health
-check on `/api/health`, and schema application to a throwaway PostgreSQL 16
-instance including the `updated_at` triggers and movement constraints.
+The foundation gate is run against a clean install: lint, typecheck, unit
+tests including product-shell metadata, production build, secret scan, Docker
+image build, a container health check on `/api/health`, and schema application
+to a throwaway PostgreSQL 16 instance including the `updated_at` triggers and
+movement constraints.
 
 ## Next
 
-1. Implement MF-00, the MFGFlow product shell.
-2. Implement MF-01, authentication and organization-scoped RLS.
-3. Continue one numbered vertical slice at a time through the hackathon journey.
-4. Add Africa's Talking credentials for live demo SMS.
+1. Implement JF-01, authentication and organization-scoped RLS.
+2. Continue one numbered vertical slice at a time through the hackathon journey.
+3. Add Africa's Talking credentials for live demo SMS.
 
 ## Blockers
 

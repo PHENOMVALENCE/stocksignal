@@ -1,6 +1,6 @@
 # StockSignal Inventory Module Specification
 
-This document describes the implemented inventory module. For the current overall product direction, read `MFGFLOW_PRODUCT_SPEC.md`; StockSignal remains a module within MFGFlow.
+This document describes the implemented inventory module. For the current overall product direction, read `JENGAFLOW_PRODUCT_SPEC.md`; StockSignal remains a module within JengaFlow.
 
 ## Purpose
 
@@ -33,7 +33,7 @@ Notification types are `LOW_STOCK` and `RESTOCK_REQUEST`. A notification records
 Example supplier message:
 
 ```text
-STOCKSIGNAL RESTOCK REQUEST
+JENGAFLOW RESTOCK REQUEST
 
 Mwigani Manufacturing requires:
 Cotton Fabric
@@ -54,4 +54,4 @@ Please contact the manufacturer regarding availability.
 
 ## Out of scope for the StockSignal foundation
 
-Customer orders, bills of materials, production tracking, quality control, and AI recommendations are intentionally specified separately in the MFGFlow documents. Authentication, USSD, payments, multi-tenancy, and advanced analytics remain separately phased work. See the roadmap for priorities.
+Customer orders, bills of materials, production tracking, quality control, and AI recommendations are intentionally specified separately in the JengaFlow documents. Authentication, USSD, payments, multi-tenancy, and advanced analytics remain separately phased work. See the roadmap for priorities.

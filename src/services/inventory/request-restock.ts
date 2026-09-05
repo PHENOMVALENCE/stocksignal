@@ -21,7 +21,7 @@ export interface RequestRestockResult {
 }
 
 function manufacturerName() {
-  return process.env.MANUFACTURER_NAME?.trim() || "StockSignal";
+  return process.env.MANUFACTURER_NAME?.trim() || "JengaFlow";
 }
 
 export async function requestRestock(

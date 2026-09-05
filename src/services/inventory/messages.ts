@@ -7,7 +7,7 @@ export function buildLowStockMessage(input: {
   unit: string;
 }): string {
   return [
-    "STOCKSIGNAL ALERT",
+    "JENGAFLOW ALERT",
     "",
     `${input.name} is running low.`,
     "",
@@ -25,7 +25,7 @@ export function buildRestockRequestMessage(input: {
   unit: string;
 }): string {
   return [
-    "STOCKSIGNAL RESTOCK REQUEST",
+    "JENGAFLOW RESTOCK REQUEST",
     "",
     `${input.manufacturerName} requires:`,
     input.name,

@@ -10,7 +10,7 @@ function notification(overrides: Partial<NotificationRecord> = {}): Notification
     inventoryItemId: "11111111-1111-4111-8111-111111111111",
     type: "LOW_STOCK",
     recipient: "+254712345678",
-    message: "STOCKSIGNAL ALERT",
+    message: "JENGAFLOW ALERT",
     provider: "AFRICAS_TALKING",
     providerMessageId: null,
     status: "PENDING",

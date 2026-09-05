@@ -1,6 +1,6 @@
 # Build-Ready Feature Backlog
 
-This is the original StockSignal inventory backlog. F01–F07 are implemented. New order-to-production development must use `MFGFLOW_IMPLEMENTATION_PLAN.md` instead of extending this numbering.
+This is the original StockSignal inventory backlog. F01–F07 are implemented. New order-to-production development must use `JENGAFLOW_IMPLEMENTATION_PLAN.md` instead of extending this numbering.
 
 This backlog translates the product specification into implementable vertical slices. Complete the slices in order because each one establishes contracts used by the next.
 

@@ -1,6 +1,6 @@
 # Coding Agent Workflow
 
-This workflow applies to Cursor, Codex, and every other coding agent used on StockSignal. The human repository owner is Valence Mwigani. Agents implement and verify changes, but commits must appear as ordinary commits authored only by Valence.
+This workflow applies to Cursor, Codex, and every other coding agent used on JengaFlow. StockSignal remains the inventory module. The human repository owner is Valence Mwigani. Agents implement and verify changes, but commits must appear as ordinary commits authored only by Valence.
 
 ## Core unit: one small feature
 

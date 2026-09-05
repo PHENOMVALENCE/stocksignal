@@ -1,8 +1,8 @@
-# StockSignal Agent Instructions
+# JengaFlow Agent Instructions
 
 ## Mission
 
-MFGFlow is a production-minded order-to-production platform for African manufacturers. StockSignal is its inventory and shortage-signal module. The system uses Next.js, TypeScript, Supabase, Africa's Talking, and Docker.
+JengaFlow is a production-minded order-to-production platform for African manufacturers. StockSignal is its inventory and shortage-signal module. The system uses Next.js, TypeScript, Supabase, Africa's Talking, and Docker.
 
 ## Non-negotiable engineering rules
 
@@ -38,9 +38,9 @@ Inspect:
 - `AGENTS.md`
 - `README.md`
 - `docs/PROJECT_SPEC.md`
-- `docs/MFGFLOW_PRODUCT_SPEC.md`
-- `docs/MFGFLOW_DOMAIN_MODEL.md`
-- `docs/MFGFLOW_IMPLEMENTATION_PLAN.md`
+- `docs/JENGAFLOW_PRODUCT_SPEC.md`
+- `docs/JENGAFLOW_DOMAIN_MODEL.md`
+- `docs/JENGAFLOW_IMPLEMENTATION_PLAN.md`
 - `docs/ARCHITECTURE.md`
 - `docs/ROADMAP.md`
 - `docs/DEVELOPMENT.md`

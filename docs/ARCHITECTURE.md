@@ -19,7 +19,7 @@ Next.js server layer
 
 ## Shape
 
-MFGFlow is a modular monolith: one Next.js deployment with UI, route handlers/server actions, domain services, and external adapters. StockSignal is its inventory module. This keeps the hackathon system easy to run and debug without blocking clear order, planning, production, quality, recommendation, and notification boundaries.
+JengaFlow is a modular monolith: one Next.js deployment with UI, route handlers/server actions, domain services, and external adapters. StockSignal is its inventory module. This keeps the hackathon system easy to run and debug without blocking clear order, planning, production, quality, recommendation, and notification boundaries.
 
 Order-to-production state flows forward through explicit server-enforced transitions. Multi-record transitions use PostgreSQL RPCs. Historical BOM requirements, production events, and quality results are snapshots or immutable events so later configuration edits do not rewrite completed work.
 

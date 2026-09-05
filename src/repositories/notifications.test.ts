@@ -8,7 +8,7 @@ const row = {
   inventory_item_id: "11111111-1111-4111-8111-111111111111",
   type: "LOW_STOCK" as const,
   recipient: "+254700000001",
-  message: "STOCKSIGNAL ALERT",
+  message: "JENGAFLOW ALERT",
   provider: "AFRICAS_TALKING",
   provider_message_id: null,
   status: "PENDING" as const,

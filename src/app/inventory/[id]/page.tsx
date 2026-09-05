@@ -30,7 +30,7 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
 
   if (!result.ok) {
     return (
-      <AppShell eyebrow="Materials" title="Inventory item">
+      <AppShell eyebrow="StockSignal" title="Inventory item">
         <ErrorState
           body={result.message}
           title={result.reason === "configuration" ? "Database is not configured" : "Item could not be loaded"}
@@ -54,7 +54,7 @@ export default async function InventoryDetailPage({ params }: InventoryDetailPag
         </Link>
       }
       description={`SKU ${item.sku}`}
-      eyebrow="Materials"
+      eyebrow="StockSignal"
       title={item.name}
     >
       <dl className="grid gap-6 border border-[var(--line)] bg-white p-6 sm:grid-cols-3">

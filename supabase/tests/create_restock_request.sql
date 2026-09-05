@@ -18,7 +18,7 @@ begin
     50,
     'Demo Mill',
     '+254700000002',
-    'STOCKSIGNAL RESTOCK REQUEST',
+    'JENGAFLOW RESTOCK REQUEST',
     'metres'
   );
 
@@ -56,7 +56,7 @@ begin
       25,
       'Demo Mill',
       '+254700000003',
-      'STOCKSIGNAL RESTOCK REQUEST',
+      'JENGAFLOW RESTOCK REQUEST',
       'metres'
     );
     raise exception 'Expected the forced restock insert failure to roll back.';

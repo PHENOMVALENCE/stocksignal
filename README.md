@@ -1,8 +1,8 @@
-# MFGFlow
+# JengaFlow
 
 **Order-to-production clarity for African manufacturers.**
 
-MFGFlow is evolving StockSignal into a lightweight order-to-production platform for small and medium manufacturers in Africa. StockSignal remains the working inventory module: it tracks critical raw materials, identifies reorder conditions, and uses Africa's Talking channels to help teams act before shortages stop production. The documented next phases connect customer orders, bills of materials, production progress, quality checks, and explainable recommendations.
+JengaFlow is a lightweight order-to-production platform for small and medium manufacturers in Africa. Its StockSignal inventory module tracks critical raw materials, identifies reorder conditions, and uses Africa's Talking channels to help teams act before shortages stop production. The documented next phases connect customer orders, bills of materials, production progress, quality checks, and explainable recommendations.
 
 ## Problem
 
@@ -10,14 +10,14 @@ Manufacturers often track stock across notebooks or disconnected spreadsheets. A
 
 ## Solution
 
-StockSignal pairs a clear inventory record with event-driven communication. A stock movement updates the balance; crossing a configured reorder threshold creates one manager alert; replenishment resets the signal; and a later shortage can alert again. Managers can then initiate a supplier restock request by SMS.
+JengaFlow pairs a clear production workflow with StockSignal's event-driven inventory record. A stock movement updates the balance; crossing a configured reorder threshold creates one manager alert; replenishment resets the signal; and a later shortage can alert again. Managers can then initiate a supplier restock request by SMS.
 
 ## Project status
 
 **Implemented — P0 MVP**
 
 - Next.js 16 App Router, React 19, strict TypeScript, Tailwind CSS, and ESLint
-- Responsive product shell and deployment health endpoint
+- JengaFlow product shell with StockSignal as the inventory module, plus a deployment health endpoint
 - Pure stock calculation and duplicate-alert rules with unit tests
 - Lazy server-side environment validation
 - Supabase schema design with constraints, indexes, and RLS enabled
@@ -27,14 +27,14 @@ StockSignal pairs a clear inventory record with event-driven communication. A st
 
 **Planned — next**
 
-- MFGFlow product shell and organization-scoped authentication
+- Organization-scoped authentication
 - Customers, products, bills of materials, and customer orders
 - Order material planning and shortage recommendations
 - Production tracking, quality checks, and delivery readiness
 
 **Future**
 
-- USSD interaction, authentication, multi-location operations, analytics, forecasting, and additional communications channels
+- USSD interaction, multi-location operations, analytics, forecasting, and additional communications channels
 
 ## How it works
 
@@ -44,7 +44,7 @@ Manager -> Next.js UI -> server action / route -> domain service
                                               `-> Africa's Talking SMS
 ```
 
-StockSignal is a modular monolith. Browser code never receives privileged Supabase or Africa's Talking credentials. Valid inventory transactions are persisted before an SMS attempt so a provider outage does not erase stock history.
+JengaFlow is a modular monolith; StockSignal is its inventory module. Browser code never receives privileged Supabase or Africa's Talking credentials. Valid inventory transactions are persisted before an SMS attempt so a provider outage does not erase stock history.
 
 ## Tech stack
 
@@ -118,8 +118,8 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 ## Documentation
 
 - [Product specification](docs/PROJECT_SPEC.md)
-- [MFGFlow product specification](docs/MFGFLOW_PRODUCT_SPEC.md), [domain model](docs/MFGFLOW_DOMAIN_MODEL.md), and [implementation plan](docs/MFGFLOW_IMPLEMENTATION_PLAN.md)
-- [Cursor start prompt for MFGFlow](docs/MFGFLOW_CURSOR_PROMPT.md)
+- [JengaFlow product specification](docs/JENGAFLOW_PRODUCT_SPEC.md), [domain model](docs/JENGAFLOW_DOMAIN_MODEL.md), and [implementation plan](docs/JENGAFLOW_IMPLEMENTATION_PLAN.md)
+- [Cursor start prompt for JengaFlow](docs/JENGAFLOW_CURSOR_PROMPT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Roadmap](docs/ROADMAP.md) and [task checklist](docs/TASKS.md)
 - [Build-ready feature backlog](docs/FEATURE_BACKLOG.md) and [Cursor implementation prompt](docs/CURSOR_IMPLEMENTATION_PROMPT.md)
@@ -132,4 +132,4 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 
 ## Hackathon focus
 
-The existing StockSignal MVP proves reliable inventory and replenishment signals. The MFGFlow hackathon journey builds on it: record an order, calculate material needs, expose a shortage, track production, pass quality control, and mark the order ready for delivery.
+The existing StockSignal MVP proves reliable inventory and replenishment signals. The JengaFlow hackathon journey builds on it: record an order, calculate material needs, expose a shortage, track production, pass quality control, and mark the order ready for delivery.

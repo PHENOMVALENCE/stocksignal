@@ -1,4 +1,4 @@
-# MFGFlow Domain and Database Plan
+# JengaFlow Domain and Database Plan
 
 This is the target model, not an instruction to create all tables in one migration. Implement one feature slice and one reversible migration at a time. Existing StockSignal inventory, movement, notification, and restock tables remain authoritative.
 

@@ -24,7 +24,7 @@ const notification: NotificationRecord = {
   inventoryItemId: item.id,
   type: "RESTOCK_REQUEST",
   recipient: "+254700000002",
-  message: "STOCKSIGNAL RESTOCK REQUEST",
+  message: "JENGAFLOW RESTOCK REQUEST",
   provider: "AFRICAS_TALKING",
   providerMessageId: "ATXid_2",
   status: "SENT",

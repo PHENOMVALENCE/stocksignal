@@ -1,8 +1,8 @@
-# MFGFlow Product Specification
+# JengaFlow Product Specification
 
 ## Product direction
 
-MFGFlow extends StockSignal from inventory monitoring into an order-to-production platform for small African manufacturers. StockSignal remains the inventory and shortage-signal module; MFGFlow connects it to customer orders, product recipes, production work, quality control, delivery readiness, and explainable recommendations.
+JengaFlow extends StockSignal from inventory monitoring into an order-to-production platform for small African manufacturers. StockSignal remains the inventory and shortage-signal module; JengaFlow connects it to customer orders, product recipes, production work, quality control, delivery readiness, and explainable recommendations.
 
 The hackathon promise is one complete journey:
 
@@ -84,4 +84,4 @@ Payments, accounting, payroll, supplier marketplace, route optimization, barcode
 
 ## Demo acceptance scenario
 
-A furniture maker records an order for 100 school desks. The active desk BOM produces aggregated material requirements. Available paint is insufficient, so MFGFlow shows the exact shortage and recommends replenishment before finishing. The manager creates a production job, advances it through the configured stages, records inventory consumption through StockSignal, completes the desk quality checklist, and marks the order ready for delivery. All records remain linked and visible in the order timeline.
+A furniture maker records an order for 100 school desks. The active desk BOM produces aggregated material requirements. Available paint is insufficient, so JengaFlow shows the exact shortage and recommends replenishment before finishing. The manager creates a production job, advances it through the configured stages, records inventory consumption through StockSignal, completes the desk quality checklist, and marks the order ready for delivery. All records remain linked and visible in the order timeline.

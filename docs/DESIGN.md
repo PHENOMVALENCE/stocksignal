@@ -1,6 +1,6 @@
 # Design Direction
 
-MFGFlow should communicate manufacturing flow, operational reliability, and urgency only when action is needed. StockSignal screens retain the same visual language as the inventory module.
+JengaFlow should communicate manufacturing flow, operational reliability, and urgency only when action is needed. StockSignal screens retain the same visual language as the inventory module.
 
 - Use a restrained neutral palette with one strong brand accent.
 - Reserve green, amber, and red for consistent inventory status semantics.

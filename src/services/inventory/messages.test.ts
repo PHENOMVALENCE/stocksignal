@@ -13,7 +13,7 @@ describe("notification messages", () => {
       }),
     ).toBe(
       [
-        "STOCKSIGNAL ALERT",
+        "JENGAFLOW ALERT",
         "",
         "Cotton Fabric is running low.",
         "",

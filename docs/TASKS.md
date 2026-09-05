@@ -1,26 +1,26 @@
 # Task Checklist
 
-## MFGFlow order-to-production
+## JengaFlow order-to-production
 
 - [x] Product specification, domain model, implementation phases, and agent prompt
-- [ ] MF-00 MFGFlow product shell
-- [ ] MF-01 organizations, authentication, and RLS
-- [ ] MF-02 customers
-- [ ] MF-03 products
-- [ ] MF-04 versioned bills of materials
-- [ ] MF-05 draft customer orders
-- [ ] MF-06 material requirement and shortage calculation
-- [ ] MF-07 confirmed-order requirement snapshot
-- [ ] MF-08 production jobs
-- [ ] MF-09 production stage transitions
-- [ ] MF-10 linked material consumption
-- [ ] MF-11 quality checklist templates
-- [ ] MF-12 quality inspections
-- [ ] MF-13 production completion and delivery readiness
-- [ ] MF-14 rule-based recommendations
-- [ ] MF-15 optional AI operational summary
-- [ ] MF-16 order-to-production dashboard
-- [ ] MF-17 deterministic demo data and script
+- [x] JF-00 JengaFlow product shell
+- [ ] JF-01 organizations, authentication, and RLS
+- [ ] JF-02 customers
+- [ ] JF-03 products
+- [ ] JF-04 versioned bills of materials
+- [ ] JF-05 draft customer orders
+- [ ] JF-06 material requirement and shortage calculation
+- [ ] JF-07 confirmed-order requirement snapshot
+- [ ] JF-08 production jobs
+- [ ] JF-09 production stage transitions
+- [ ] JF-10 linked material consumption
+- [ ] JF-11 quality checklist templates
+- [ ] JF-12 quality inspections
+- [ ] JF-13 production completion and delivery readiness
+- [ ] JF-14 rule-based recommendations
+- [ ] JF-15 optional AI operational summary
+- [ ] JF-16 order-to-production dashboard
+- [ ] JF-17 deterministic demo data and script
 
 ## Foundation
 

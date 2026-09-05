@@ -1,8 +1,8 @@
 # Roadmap
 
-The original StockSignal inventory roadmap remains the foundation. New order-to-production work follows the numbered vertical slices in `MFGFLOW_IMPLEMENTATION_PLAN.md`.
+The original StockSignal inventory roadmap remains the foundation. New order-to-production work follows the numbered vertical slices in `JENGAFLOW_IMPLEMENTATION_PLAN.md`.
 
-## MFGFlow hackathon path
+## JengaFlow hackathon path
 
 - Product alignment and organization-scoped authentication
 - Customers, products, versioned bills of materials, and draft orders
