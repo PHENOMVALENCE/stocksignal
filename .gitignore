@@ -30,6 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Supabase CLI local state
+supabase/.temp/
+
 # environment files
 # ignore every .env variant so a new one cannot leak, then re-allow the template
 .env*

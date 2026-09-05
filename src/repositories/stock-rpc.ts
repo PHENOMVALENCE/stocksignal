@@ -27,8 +27,8 @@ export function createStockRpc(client: StockSignalDatabaseClient = createSupabas
       const { data, error } = await client.rpc("apply_stock_movement", {
         p_inventory_item_id: input.inventoryItemId,
         p_type: input.type,
-        p_quantity: quantityToDatabase(input.quantity),
-        p_notes: input.notes ?? null,
+        p_quantity: Number(quantityToDatabase(input.quantity)),
+        p_notes: input.notes,
       });
 
       if (error) {

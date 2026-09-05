@@ -4,6 +4,8 @@ The reviewed Supabase/PostgreSQL schema lives in `supabase/schema.sql` and is ap
 
 ## Apply locally or remotely
 
+See `docs/SUPABASE_SETUP.md` for the complete command-by-command process, environment mapping, migration workflow, safety warnings, and troubleshooting.
+
 ```bash
 # Local Supabase (Docker)
 npx supabase start
@@ -17,10 +19,10 @@ npx supabase db push
 Regenerate types after a schema change:
 
 ```bash
-npx supabase gen types typescript --local > src/types/database.ts
+npm run db:types
 ```
 
-The committed `src/types/database.ts` file matches the MVP schema so builds do not require a live project.
+The generated `src/types/database.generated.ts` file matches the MVP schema so builds do not require a live project. Stable domain aliases live in `src/types/database.ts` and are not overwritten by type generation.
 
 ## Tables
 

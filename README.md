@@ -120,9 +120,9 @@ The P0 roadmap centers on inventory CRUD, transactional movements, threshold det
 - [Architecture](docs/ARCHITECTURE.md)
 - [Roadmap](docs/ROADMAP.md) and [task checklist](docs/TASKS.md)
 - [Build-ready feature backlog](docs/FEATURE_BACKLOG.md) and [Cursor implementation prompt](docs/CURSOR_IMPLEMENTATION_PROMPT.md)
-- [Database](docs/DATABASE.md) and [environment](docs/ENVIRONMENT.md)
+- [Database design](docs/DATABASE.md), [Supabase setup](docs/SUPABASE_SETUP.md), and [environment](docs/ENVIRONMENT.md)
 - [Africa's Talking](docs/AFRICAS_TALKING.md)
-- [Development](docs/DEVELOPMENT.md), [testing](docs/TESTING.md), and [Docker](docs/DOCKER.md)
+- [Development](docs/DEVELOPMENT.md), [coding-agent workflow](docs/AGENT_WORKFLOW.md), [testing](docs/TESTING.md), and [Docker](docs/DOCKER.md)
 - [Security](docs/SECURITY.md), [design](docs/DESIGN.md), and [decisions](docs/DECISIONS.md)
 - [Project status](docs/STATUS.md), [demo](docs/DEMO.md), and [official resources](docs/RESOURCES.md)
 

@@ -35,7 +35,7 @@ export function createRestockRequestRepository(client: StockSignalDatabaseClient
         .from("restock_requests")
         .insert({
           inventory_item_id: input.inventoryItemId,
-          requested_quantity: quantityToDatabase(input.requestedQuantity),
+          requested_quantity: Number(quantityToDatabase(input.requestedQuantity)),
           supplier_name: input.supplierName,
           supplier_phone: input.supplierPhone,
           notification_id: input.notificationId ?? null,
